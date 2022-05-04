@@ -125,7 +125,6 @@ function draw() {
             if ((event.body == twoPyramidStage.bird.getBody())
                 && (twoPyramidStage.bird.body.position.x - 250) < -50) firing = true;
         })
-
         Events.on(engine, 'afterUpdate', function () {
             if (firing && Math.abs(twoPyramidStage.bird.body.position.x - 250) < 20
                 && Math.abs(twoPyramidStage.bird.body.position.y - 250) < 20) {

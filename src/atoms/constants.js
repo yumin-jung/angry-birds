@@ -9,5 +9,5 @@ export let Engine = Matter.Engine,
     Composite = Matter.Composite,
     Bodies = Matter.Bodies;
 
-export const RENDER_WIDTH = 1200;
-export const RENDER_HEIGHT = 800;
+export const RENDER_WIDTH = 800;
+export const RENDER_HEIGHT = 400;
