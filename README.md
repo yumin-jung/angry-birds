@@ -1,5 +1,3 @@
-## This document is proposal of [*Project1*](http://git.prototyping.id/20170595/homework6.git) by 20170595 _Yumin Jung_
-
 ## Contents
 - [Angry Birds](#angry-birds)
   - [Game Mechanics](#game-mechanics)
