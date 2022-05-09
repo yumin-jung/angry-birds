@@ -1,16 +1,27 @@
-import { Bird } from '../../molecules/bird';
+import { RedBird } from '../../organisms/birds/red-bird';
 import { Box } from '../../molecules/box';
 import { Ground } from '../../molecules/ground';
 import { Slingshot } from '../../molecules/slingshot';
+import {
+    RENDER_WIDTH,
+    BIRD_X,
+    BIRD_Y,
+    BIRD_SIZE,
+    GROUND_HEIGHT,
+    GROUND_X,
+    GROUND_Y
+} from '../../atoms/constants';
+
 
 class TutorialStage {
     constructor() {
         this.composites = [];
 
-        this.bird = new Bird(250, 250, 20);
-        this.ground = new Ground(450, 370, 915, 30);
-        this.slingshot = new Slingshot(250, 250, this.bird.getBody());
-        this.box = new Box(600, 200, 25, 40);
+        this.bird = new RedBird(BIRD_X, BIRD_Y, BIRD_SIZE);
+        this.ground = new Ground(GROUND_X, GROUND_Y, RENDER_WIDTH, GROUND_HEIGHT);
+        this.slingshot = new Slingshot(BIRD_X, BIRD_Y, this.bird.getBody());
+
+        this.box = new Box(1000, 200, 25, 40);
 
         this.composites.push(this.bird.getBody());
         this.composites.push(this.ground.getBody());

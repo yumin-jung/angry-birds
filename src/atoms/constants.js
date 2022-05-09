@@ -9,5 +9,11 @@ export let Engine = Matter.Engine,
     Composite = Matter.Composite,
     Bodies = Matter.Bodies;
 
-export const RENDER_WIDTH = 800;
-export const RENDER_HEIGHT = 400;
+export const RENDER_WIDTH = 1200;
+export const RENDER_HEIGHT = 600;
+export const BIRD_X = 250;
+export const BIRD_Y = 450;
+export const BIRD_SIZE = 20;
+export const GROUND_HEIGHT = 30;
+export const GROUND_X = RENDER_WIDTH / 2;
+export const GROUND_Y = RENDER_HEIGHT - GROUND_HEIGHT / 2;

@@ -16,8 +16,12 @@ class Slingshot extends Body {
                 y: y
             },
             bodyB: this.bird,
-            stiffness: 0.4,
-            length: 0.01
+            stiffness: 0.05,
+            render: {
+                type: "line",
+                strokeStyle: '#8B4513',
+                lineWidth: 4
+            }
         }
         this.body = Matter.Constraint.create(options);
     }

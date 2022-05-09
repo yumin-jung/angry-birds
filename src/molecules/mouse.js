@@ -11,7 +11,7 @@ class MouseBody extends Body {
         this.mouseConstraint = MouseConstraint.create(engine, {
             mouse: this.mouse,
             constraint: {
-                stiffness: 0.2,
+                stiffness: 0.3,
                 render: {
                     visible: false
                 }

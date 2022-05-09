@@ -16,7 +16,11 @@ import {
 import { TutorialStage } from './templates/stages/tutorial-stage';
 import { PyramidStage } from './templates/stages/pyramid-stage';
 import { TwoPyramidStage } from './templates/stages/two-pyramid-stage';
-import { Bird } from './molecules/bird';
+import { RedBird } from './organisms/birds/red-bird';
+
+const button1 = document.getElementById('button1');
+const button2 = document.getElementById('button2');
+const button3 = document.getElementById('button3');
 
 let engine,
     render,
@@ -28,7 +32,6 @@ let firing = false;
 let tutorialStage,
     pyramidStage,
     twoPyramidStage;
-
 
 function setup() {
     createCanvas(0, 0)
@@ -48,14 +51,16 @@ function setup() {
 
     Runner.run(engine);
     Render.run(render);
-    engine.timing.timeScale = 0.45;
+
+    // engine.timing.timeScale = 0.3 ;
+    // engine.gravity.scale += 0.001;
 
     mouse = Mouse.create(render.canvas);
 
     mouseConstraint = MouseConstraint.create(engine, {
         mouse: mouse,
         constraint: {
-            stiffness: 0.2,
+            stiffness: 0.05,
             render: {
                 visible: false
             }
@@ -76,14 +81,13 @@ function draw() {
         Composite.add(engine.world, mouseConstraint);
 
         Events.on(mouseConstraint, 'enddrag', function (event) {
-            if ((event.body == tutorialStage.bird.getBody())
-                && (tutorialStage.bird.body.position.x - 250) < -50) firing = true;
+            if (event.body == tutorialStage.bird.getBody()) firing = true;
         })
 
         Events.on(engine, 'afterUpdate', function () {
             if (firing && Math.abs(tutorialStage.bird.body.position.x - 250) < 20
-                && Math.abs(tutorialStage.bird.body.position.y - 250) < 20) {
-                let newBird = new Bird(250, 250, 20);
+                && Math.abs(tutorialStage.bird.body.position.y - 450) < 20) {
+                let newBird = new RedBird(250, 450, 20);
                 tutorialStage.bird = newBird;
                 Composite.add(engine.world, tutorialStage.bird.getBody());
                 tutorialStage.slingshot.body.bodyB = tutorialStage.bird.getBody();
@@ -99,14 +103,13 @@ function draw() {
         Composite.add(engine.world, mouseConstraint);
 
         Events.on(mouseConstraint, 'enddrag', function (event) {
-            if ((event.body == pyramidStage.bird.getBody())
-                && (pyramidStage.bird.body.position.x - 250) < -50) firing = true;
+            if (event.body == pyramidStage.bird.getBody()) firing = true;
         })
 
         Events.on(engine, 'afterUpdate', function () {
             if (firing && Math.abs(pyramidStage.bird.body.position.x - 250) < 20
-                && Math.abs(pyramidStage.bird.body.position.y - 250) < 20) {
-                let newBird = new Bird(250, 250, 20);
+                && Math.abs(pyramidStage.bird.body.position.y - 450) < 20) {
+                let newBird = new RedBird(250, 450, 20);
                 pyramidStage.bird = newBird;
                 Composite.add(engine.world, pyramidStage.bird.getBody());
                 pyramidStage.slingshot.body.bodyB = pyramidStage.bird.getBody();
@@ -122,13 +125,12 @@ function draw() {
         Composite.add(engine.world, mouseConstraint);
 
         Events.on(mouseConstraint, 'enddrag', function (event) {
-            if ((event.body == twoPyramidStage.bird.getBody())
-                && (twoPyramidStage.bird.body.position.x - 250) < -50) firing = true;
+            if (event.body == twoPyramidStage.bird.getBody()) firing = true;
         })
         Events.on(engine, 'afterUpdate', function () {
             if (firing && Math.abs(twoPyramidStage.bird.body.position.x - 250) < 20
-                && Math.abs(twoPyramidStage.bird.body.position.y - 250) < 20) {
-                let newBird = new Bird(250, 250, 20);
+                && Math.abs(twoPyramidStage.bird.body.position.y - 450) < 20) {
+                let newBird = new RedBird(250, 450, 20);
                 twoPyramidStage.bird = newBird;
                 Composite.add(engine.world, twoPyramidStage.bird.getBody());
                 twoPyramidStage.slingshot.body.bodyB = twoPyramidStage.bird.getBody();
@@ -139,25 +141,44 @@ function draw() {
     noLoop();
 }
 
+button1.addEventListener('click', function (event) {
+    event.preventDefault();
+    console.log("tutorial");
+    stageName = "tutorial"
+    loop();
+});
+button2.addEventListener('click', function (event) {
+    event.preventDefault();
+    console.log("pyramid");
+    stageName = "pyramid";
+    loop();
+});
+button3.addEventListener('click', function (event) {
+    event.preventDefault();
+    console.log("twopyramid");
+    stageName = "twoPyramid";
+    loop();
+});
+
 function keyPressed() {
     if (key == ' ') {
-        if (stageName == "tutorial") {
-            stageName = "pyramid";
-        } else if (stageName == "pyramid") {
-            stageName = "twoPyramid";
-        } else if (stageName == "twoPyramid") {
-            stageName = "tutorial"
-        }
-
         loop();
+    } else if (key == 'a') { // increase gravity
+        engine.gravity.scale = 0.005;
+        console.log(engine);
+        setTimeout(() => {
+            engine.gravity.scale = 0.001;
+        }, 500)
+    } else if (key == 'b') { // increase x-axis-gravity
+        engine.gravity.x = 1;
+        console.log(engine);
+        setTimeout(() => {
+            engine.gravity.x = 0;
+        }, 500)
     }
 }
 
 
-function mouseReleased() {
-}
-
 window.setup = setup;
 window.draw = draw;
-window.mouseReleased = mouseReleased;
 window.keyPressed = keyPressed;
