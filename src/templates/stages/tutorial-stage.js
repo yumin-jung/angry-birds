@@ -1,12 +1,13 @@
 import { RedBird } from '../../organisms/birds/red-bird';
-import { Box } from '../../molecules/box';
+import { MinionPig } from '../../organisms/pigs/minion-pig';
 import { Ground } from '../../molecules/ground';
 import { Slingshot } from '../../molecules/slingshot';
 import {
     RENDER_WIDTH,
     BIRD_X,
     BIRD_Y,
-    BIRD_SIZE,
+    BIRD_SIZE_RED,
+    PIG_SIZE_MINION,
     GROUND_HEIGHT,
     GROUND_X,
     GROUND_Y
@@ -17,11 +18,11 @@ class TutorialStage {
     constructor() {
         this.composites = [];
 
-        this.bird = new RedBird(BIRD_X, BIRD_Y, BIRD_SIZE);
+        this.bird = new RedBird(BIRD_X, BIRD_Y, BIRD_SIZE_RED);
         this.ground = new Ground(GROUND_X, GROUND_Y, RENDER_WIDTH, GROUND_HEIGHT);
         this.slingshot = new Slingshot(BIRD_X, BIRD_Y, this.bird.getBody());
 
-        this.box = new Box(1000, 200, 25, 40);
+        this.box = new MinionPig(1000, 400, PIG_SIZE_MINION);
 
         this.composites.push(this.bird.getBody());
         this.composites.push(this.ground.getBody());

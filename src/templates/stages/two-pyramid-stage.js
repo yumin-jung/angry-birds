@@ -7,7 +7,7 @@ import {
     RENDER_WIDTH,
     BIRD_X,
     BIRD_Y,
-    BIRD_SIZE,
+    BIRD_SIZE_RED,
     GROUND_HEIGHT,
     GROUND_X,
     GROUND_Y
@@ -17,7 +17,7 @@ class TwoPyramidStage {
     constructor() {
         this.composites = [];
 
-        this.bird = new RedBird(BIRD_X, BIRD_Y, BIRD_SIZE);
+        this.bird = new RedBird(BIRD_X, BIRD_Y, BIRD_SIZE_RED);
         this.ground1 = new Ground(GROUND_X, GROUND_Y, RENDER_WIDTH, GROUND_HEIGHT);
         this.slingshot = new Slingshot(BIRD_X, BIRD_Y, this.bird.getBody());
 
