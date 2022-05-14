@@ -1,7 +1,101 @@
+::selection {
+    background: none;
+}
+
+@font-face {
+    font-family: 'angry-birds';
+    src: url('../data/font/angrybirds-regular.ttf') format('truetype');
+}
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 80vh;
     flex-direction: column;
+}
+
+#play {
+    position: absolute;
+    top: 35vh;
+    border: none;
+    background: none;
+    transition: all 0.8s ease;
+}
+
+#play:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+#play img {
+    width: 45%;
+    height: auto;
+}
+
+#score {
+    position: absolute;
+    top: 15vh;
+    left: 12vw;
+}
+
+#stage {
+    position: absolute;
+    transition: all 0.8s ease;
+}
+
+#stage button {
+    font-family: 'angry-birds';
+    background-color: #F4BA4C;
+    color: white;
+    font-size: 80px;
+    padding: 24px 48px 24px 48px;
+    border-radius: 16px;
+    border: 4px solid white;
+    cursor: pointer;
+    transition: all 0.8s ease;
+}
+
+#stage-wrapper {
+    transition: all 0.8s ease;
+    margin: 20px;
+}
+
+#stage-wrapper:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+#stage-wrapper {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 16px;
+}
+
+#stage1-star,
+#stage2-star,
+#stage3-star,
+#stage4-star {
+    padding: 6px;
+    text-align: center;
+    font-size: 24px;
+}
+
+#stage1 {
+    top: 35vh;
+    left: 20vw;
+}
+
+#stage2 {
+    top: 35vh;
+    left: 39vw;
+}
+
+#stage3 {
+    top: 35vh;
+    left: 51vw;
+}
+
+#stage4 {
+    top: 35vh;
+    left: 63vw;
 }

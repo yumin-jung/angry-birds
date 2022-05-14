@@ -5,6 +5,7 @@ class Ground extends Box {
         super(x, y, w, h);
         this.body.isStatic = true;
         this.body.friction = 0.6;
+        this.body.render.fillStyle = 'grey'
     }
 }
 

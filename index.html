@@ -15,14 +15,40 @@
 </head>
 
 <body>
-    <div>
-        <button id="button0" type="button">0</button>
-        <button id="button1" type="button">1</button>
-        <button id="button2" type="button">2</button>
-        <button id="button3" type="button">3</button>
-    </div>
-    <script defer type="module" src="./src/main.js"></script>
+    <script type="text/javascript">
+        function showButton(btn) {
+            document.getElementById(btn).style.display = "flex";
+        }
+        function hideButton(btn) {
+            document.getElementById(btn).style.display = "none";
+        }
+    </script>
 
+    <button id="play" type="button" onclick="hideButton('play'); showButton('stage');">
+        <img src="./data/play.png" alt="play">
+    </button>
+
+    <div id="stage" style="display:none">
+        <div id="stage-wrapper">
+            <button id="stage1" type="button" onclick="hideButton('stage');">1</button>
+            <div id="stage1-star">⭐️ ⭐️ ⭐️</div>
+        </div>
+        <div id="stage-wrapper">
+            <button id="stage2" type="button" onclick="hideButton('stage');">2</button>
+            <div id="stage2-star">⭐️</div>
+        </div>
+        <div id="stage-wrapper">
+            <button id="stage3" type="button" onclick="hideButton('stage');">3</button>
+            <div id="stage3-star">⭐️</div>
+        </div>
+        <div id="stage-wrapper">
+            <button id="stage4" type="button" onclick="hideButton('stage');">4</button>
+            <div id="stage4-star">⭐️</div>
+        </div>
+    </div>
+
+    <div id="score" style="display:none">Score: 0</div>
+    <script defer type="module" src="./src/main.js"></script>
 </body>
 
 </html>
