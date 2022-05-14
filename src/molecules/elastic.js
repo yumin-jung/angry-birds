@@ -1,12 +1,6 @@
-import {
-    Events,
-    Composite
-} from '../atoms/constants';
-
 import { Body } from '../atoms/body';
-import { Bird } from './bird';
 
-class Slingshot extends Body {
+class Elastic extends Body {
     constructor(x, y, bird) {
         super();
         this.bird = bird;
@@ -27,4 +21,4 @@ class Slingshot extends Body {
     }
 }
 
-export { Slingshot }
+export { Elastic }

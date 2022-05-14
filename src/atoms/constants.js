@@ -24,3 +24,9 @@ export const PIG_SIZE_KING = 50;
 export const GROUND_HEIGHT = 30;
 export const GROUND_X = RENDER_WIDTH / 2;
 export const GROUND_Y = RENDER_HEIGHT - GROUND_HEIGHT / 2;
+
+export const Elastic_LEFT_X = BIRD_X - 18;
+export const Elastic_RIGHT_X = BIRD_X + 6;
+export const Elastic_Y = BIRD_Y + 5;
+export const SLIGSHOT_BODY_X = BIRD_X - 6;
+export const SLIGSHOT_BODY_Y = GROUND_Y - 75;

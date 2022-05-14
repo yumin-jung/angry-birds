@@ -54,7 +54,7 @@ class HomeScreen {
         this.composites.push(this.KingPig.getBody());
     }
 
-    getScreen() {
+    getComposites() {
         return this.composites;
     }
 

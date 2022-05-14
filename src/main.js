@@ -60,13 +60,12 @@ function setup() {
         options: {
             width: RENDER_WIDTH,
             height: RENDER_HEIGHT,
-            showAngleIndicator: false, // --> 나중에 false로
+            showAngleIndicator: false,
             wireframes: false,
             background: "lightblue"
         }
     })
 
-    // Runner.run(engine);
     Render.run(render);
     runner = Runner.create();
     Runner.run(runner, engine);
@@ -90,184 +89,88 @@ function setup() {
 }
 
 function draw() {
-    // input에 따라서 screen바꾸기
     if (stageName == "home") {
         Composite.clear(engine.world);
 
         homeScreen = new HomeScreen();
 
-        Composite.add(engine.world, homeScreen.getScreen());
-        Composite.add(engine.world, mouseConstraint);
+        addComposites(homeScreen);
     }
     if (stageName == "tutorial") {
         Composite.clear(engine.world);
 
         tutorialStage = new TutorialStage();
 
-        let getTutorialStageComposite = new Promise((resolve) => {
-            Composite.add(engine.world, tutorialStage.getStage());
-            Composite.add(engine.world, mouseConstraint);
-
-            setTimeout(function () {
-                resolve('success');
-            }, 250)
-        })
-
-        getTutorialStageComposite.then(() => {
-            Events.on(mouseConstraint, 'startdrag', function () {
-                tutorialStage.slingshot1.body.render.visible = true;
-                tutorialStage.slingshot2.body.render.visible = true;
-            })
-
-            Events.on(mouseConstraint, 'enddrag', function (event) {
-                console.log(event.body == tutorialStage.bird.body)
-                tutorialStage.slingshot1.body.render.visible = false;
-                tutorialStage.slingshot2.body.render.visible = false;
-                if (event.body == tutorialStage.bird.body) firing = true;
-            })
-
-            Events.on(engine, 'afterUpdate', function () {
-                if (firing && Math.abs(tutorialStage.bird.body.position.x - 250) < 20
-                    && Math.abs(tutorialStage.bird.body.position.y - 450) < 20) {
-                    let newBird = new RedBird(250, 450, 20);
-                    tutorialStage.bird = newBird;
-                    Composite.add(engine.world, tutorialStage.bird.getBody());
-                    tutorialStage.slingshot1.body.bodyB = tutorialStage.bird.getBody();
-                    tutorialStage.slingshot2.body.bodyB = tutorialStage.bird.getBody();
-                    firing = false;
-                }
-            })
-        })
-
-    } else if (stageName == "pyramid") {
+        getStage(tutorialStage);
+    }
+    else if (stageName == "pyramid") {
         Composite.clear(engine.world);
 
         pyramidStage = new PyramidStage();
 
-        let getPyramidStageComposite = new Promise((resolve) => {
-            Composite.add(engine.world, pyramidStage.getStage());
-            Composite.add(engine.world, mouseConstraint);
-
-            setTimeout(function () {
-                resolve('success');
-            }, 250)
-        })
-
-        getPyramidStageComposite.then(() => {
-            Events.on(mouseConstraint, 'enddrag', function (event) {
-                console.log(event.body == pyramidStage.bird.body)
-                if (event.body == pyramidStage.bird.body) firing = true;
-            })
-
-            Events.on(engine, 'afterUpdate', function () {
-                if (firing && Math.abs(pyramidStage.bird.body.position.x - 250) < 20
-                    && Math.abs(pyramidStage.bird.body.position.y - 450) < 20) {
-                    let newBird = new RedBird(250, 450, 20);
-                    pyramidStage.bird = newBird;
-                    Composite.add(engine.world, pyramidStage.bird.getBody());
-                    pyramidStage.slingshot.body.bodyB = pyramidStage.bird.getBody();
-                    firing = false;
-                }
-            })
-        })
-    } else if (stageName == "twoPyramid") {
+        getStage(pyramidStage);
+    }
+    else if (stageName == "twoPyramid") {
         Composite.clear(engine.world);
 
         twoPyramidStage = new TwoPyramidStage();
 
-        let getTwoPyramidStageComposite = new Promise((resolve) => {
-            Composite.add(engine.world, twoPyramidStage.getStage());
-            Composite.add(engine.world, mouseConstraint);
-
-            setTimeout(function () {
-                resolve('success');
-            }, 250)
-        })
-
-        getTwoPyramidStageComposite.then(() => {
-            Events.on(mouseConstraint, 'enddrag', function (event) {
-                console.log(event.body == twoPyramidStage.bird.body)
-                if (event.body == twoPyramidStage.bird.body) firing = true;
-            })
-            Events.on(engine, 'afterUpdate', function () {
-                if (firing && Math.abs(twoPyramidStage.bird.body.position.x - 250) < 20
-                    && Math.abs(twoPyramidStage.bird.body.position.y - 450) < 20) {
-                    let newBird = new RedBird(250, 450, 20);
-                    twoPyramidStage.bird = newBird;
-                    Composite.add(engine.world, twoPyramidStage.bird.getBody());
-                    twoPyramidStage.slingshot.body.bodyB = twoPyramidStage.bird.getBody();
-                    firing = false;
-                }
-            })
-        })
+        getStage(twoPyramidStage);
     }
     noLoop();
 }
 
 stage1.addEventListener('click', function (event) {
     event.preventDefault();
-    resetEvents();
-    score.resetScore();
-    stageName = "tutorial";
-    loop();
+    resetStage("tutorial");
 });
 stage2.addEventListener('click', function (event) {
     event.preventDefault();
-    resetEvents();
-    score.resetScore();
-    stageName = "pyramid";
-    loop();
+    resetStage("pyramid");
 });
 stage3.addEventListener('click', function (event) {
     event.preventDefault();
-    resetEvents();
-    score.resetScore();
-    stageName = "twoPyramid";
-    loop();
+    resetStage("twoPyramid");
 });
 stage4.addEventListener('click', function (event) {
     event.preventDefault();
-    resetEvents();
-    score.resetScore();
-    stageName = "boomerang";
-    loop();
+    resetStage("boomerang");
 });
 
 playHomeButton.addEventListener('click', function (event) {
     event.preventDefault();
-    stageName = "selectStage";
-    loop();
+    let awaitReset = new Promise((resolve) => {
+        stageName = "selectStage";
+        setTimeout(function () {
+            resolve('success');
+        }, 100)
+    })
+    awaitReset.then(() => {
+        loop();
+    })
 });
 
-pauseButton.addEventListener('click', function (event) {
-    event.preventDefault();
-    console.log(engine)
-});
+// pauseButton.addEventListener('click', function (event) {
+//     event.preventDefault();
+// });
 
-playButton.addEventListener('click', function (event) {
-    event.preventDefault();
-    console.log(engine)
-});
+// playButton.addEventListener('click', function (event) {
+//     event.preventDefault();
+// });
 
 restartButton.addEventListener('click', function (event) {
     event.preventDefault();
-    resetEvents();
-    score.resetScore();
-    loop();
+    resetStage(stageName);
 });
 
 homeButton.addEventListener('click', function (event) {
     event.preventDefault();
-    stageName = "home";
-    score.resetScore();
-    loop();
+    resetStage("home");
 });
 
 stageButton.addEventListener('click', function (event) {
     event.preventDefault();
-    stageName = "home";
-    score.resetScore();
-    loop();
+    resetStage("home");
 });
 
 function keyPressed() {
@@ -300,12 +203,72 @@ function mousePressed() {
 }
 
 function resetEvents() {
-    if (stageName == "tutorial" || stageName == "pyramid" || stageName == "twopyramid") {
+    if (stageName == "tutorial" || stageName == "pyramid" || stageName == "twoPyramid") {
         Events.off(mouseConstraint, 'enddrag');
         Events.off(engine, 'afterUpdate');
     }
 }
 
+function firingEvents(stage) {
+    Events.on(mouseConstraint, 'startdrag', function () {
+        setTimeout(function () {
+            stage.slingshot.elastic1.body.render.visible = true;
+            stage.slingshot.elastic2.body.render.visible = true;
+        }, 100)
+    })
+
+    Events.on(mouseConstraint, 'enddrag', function (event) {
+        stage.slingshot.elastic1.body.render.visible = false;
+        stage.slingshot.elastic2.body.render.visible = false;
+        if (event.body == stage.bird.body) firing = true;
+    })
+
+    Events.on(engine, 'afterUpdate', function () {
+        if (firing && Math.abs(stage.bird.body.position.x - 250) < 20
+            && Math.abs(stage.bird.body.position.y - 450) < 20) {
+            let newBird = new RedBird(250, 450, 20);
+            stage.bird = newBird;
+            Composite.add(engine.world, stage.bird.getBody());
+            stage.slingshot.elastic1.body.bodyB = stage.bird.getBody();
+            stage.slingshot.elastic2.body.bodyB = stage.bird.getBody();
+            firing = false;
+        }
+    })
+}
+
+function addComposites(stage) {
+    Composite.add(engine.world, stage.getComposites());
+    Composite.add(engine.world, mouseConstraint);
+}
+
+function getStage(stage) {
+    let getStageComposite = new Promise((resolve) => {
+        addComposites(stage);
+
+        setTimeout(function () {
+            resolve('success');
+        }, 250)
+    })
+
+    getStageComposite.then(() => {
+        firingEvents(stage);
+    })
+}
+
+function resetStage(stage) {
+    let awaitReset = new Promise((resolve) => {
+        resetEvents();
+        score.resetScore();
+        setTimeout(function () {
+            resolve('success');
+        }, 100)
+    })
+    awaitReset.then(() => {
+        stageName = stage;
+    }).then(() => {
+        loop();
+    })
+}
 
 window.setup = setup;
 window.draw = draw;
