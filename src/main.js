@@ -17,6 +17,8 @@ import { HomeScreen } from './templates/screens/home-screen';
 import { TutorialStage } from './templates/stages/tutorial-stage';
 import { PyramidStage } from './templates/stages/pyramid-stage';
 import { TwoPyramidStage } from './templates/stages/two-pyramid-stage';
+import { BoomerangStage } from './templates/stages/boomerang-stage';
+
 import { RedBird } from './organisms/birds/red-bird';
 import { ScoreDisplay } from './ScoreDisplay';
 
@@ -45,7 +47,8 @@ let firing = false;
 let homeScreen,
     tutorialStage,
     pyramidStage,
-    twoPyramidStage;
+    twoPyramidStage,
+    boomerangStage;
 
 function setup() {
     createCanvas(0, 0)
@@ -96,7 +99,7 @@ function draw() {
 
         addComposites(homeScreen);
     }
-    if (stageName == "tutorial") {
+    else if (stageName == "tutorial") {
         Composite.clear(engine.world);
 
         tutorialStage = new TutorialStage();
@@ -116,6 +119,13 @@ function draw() {
         twoPyramidStage = new TwoPyramidStage();
 
         getStage(twoPyramidStage);
+    }
+    else if (stageName == "boomerang") {
+        Composite.clear(engine.world);
+
+        boomerangStage = new BoomerangStage();
+
+        getStage(boomerangStage);
     }
     noLoop();
 }
@@ -203,7 +213,8 @@ function mousePressed() {
 }
 
 function resetEvents() {
-    if (stageName == "tutorial" || stageName == "pyramid" || stageName == "twoPyramid") {
+    if (stageName == "tutorial" || stageName == "pyramid"
+        || stageName == "twoPyramid" || stageName == "boomerang") {
         Events.off(mouseConstraint, 'enddrag');
         Events.off(engine, 'afterUpdate');
     }
