@@ -22,12 +22,12 @@ class TutorialStage {
         this.ground = new Ground(GROUND_X, GROUND_Y, RENDER_WIDTH, GROUND_HEIGHT);
         this.slingshot = new Slingshot(BIRD_X, BIRD_Y, this.bird.getBody());
 
-        this.box = new MinionPig(1000, 400, PIG_SIZE_MINION);
+        this.pig = new MinionPig(1000, 400, PIG_SIZE_MINION);
 
         this.composites.push(this.bird.getBody());
         this.composites.push(this.ground.getBody());
         this.composites.push(this.slingshot.getBody());
-        this.composites.push(this.box.getBody());
+        this.composites.push(this.pig.getBody());
     }
 
     getStage() {
