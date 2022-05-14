@@ -19,8 +19,8 @@ class Slingshot extends Body {
             stiffness: 0.05,
             render: {
                 type: "line",
-                strokeStyle: '#8B4513',
-                lineWidth: 4
+                strokeStyle: '#120E0A',
+                lineWidth: 8
             }
         }
         this.body = Matter.Constraint.create(options);

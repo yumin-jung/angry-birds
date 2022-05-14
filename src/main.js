@@ -18,7 +18,6 @@ import { TutorialStage } from './templates/stages/tutorial-stage';
 import { PyramidStage } from './templates/stages/pyramid-stage';
 import { TwoPyramidStage } from './templates/stages/two-pyramid-stage';
 import { RedBird } from './organisms/birds/red-bird';
-import { ChuckBird } from './organisms/birds/chuck-bird';
 import { ScoreDisplay } from './ScoreDisplay';
 
 const stage1 = document.getElementById('stage1');
@@ -26,13 +25,19 @@ const stage2 = document.getElementById('stage2');
 const stage3 = document.getElementById('stage3');
 const stage4 = document.getElementById('stage4');
 
-const playButton = document.getElementById('play');
+const playHomeButton = document.getElementById('play-home');
+const pauseButton = document.getElementById('pause-btn');
+const playButton = document.getElementById('play-btn');
+const restartButton = document.getElementById('restart-btn');
+const homeButton = document.getElementById('home-btn');
+const stageButton = document.getElementById('stage-btn');
 
 let score;
 
 let engine,
     render,
     mouse,
+    runner,
     mouseConstraint;
 let stageName = "home";
 let firing = false;
@@ -61,8 +66,10 @@ function setup() {
         }
     })
 
-    Runner.run(engine);
+    // Runner.run(engine);
     Render.run(render);
+    runner = Runner.create();
+    Runner.run(runner, engine);
 
     // engine.timing.timeScale = 0.3 ;
     // engine.gravity.scale += 0.001;
@@ -107,8 +114,15 @@ function draw() {
         })
 
         getTutorialStageComposite.then(() => {
+            Events.on(mouseConstraint, 'startdrag', function () {
+                tutorialStage.slingshot1.body.render.visible = true;
+                tutorialStage.slingshot2.body.render.visible = true;
+            })
+
             Events.on(mouseConstraint, 'enddrag', function (event) {
                 console.log(event.body == tutorialStage.bird.body)
+                tutorialStage.slingshot1.body.render.visible = false;
+                tutorialStage.slingshot2.body.render.visible = false;
                 if (event.body == tutorialStage.bird.body) firing = true;
             })
 
@@ -118,7 +132,8 @@ function draw() {
                     let newBird = new RedBird(250, 450, 20);
                     tutorialStage.bird = newBird;
                     Composite.add(engine.world, tutorialStage.bird.getBody());
-                    tutorialStage.slingshot.body.bodyB = tutorialStage.bird.getBody();
+                    tutorialStage.slingshot1.body.bodyB = tutorialStage.bird.getBody();
+                    tutorialStage.slingshot2.body.bodyB = tutorialStage.bird.getBody();
                     firing = false;
                 }
             })
@@ -218,9 +233,40 @@ stage4.addEventListener('click', function (event) {
     loop();
 });
 
-playButton.addEventListener('click', function (event) {
+playHomeButton.addEventListener('click', function (event) {
     event.preventDefault();
     stageName = "selectStage";
+    loop();
+});
+
+pauseButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    console.log(engine)
+});
+
+playButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    console.log(engine)
+});
+
+restartButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    resetEvents();
+    score.resetScore();
+    loop();
+});
+
+homeButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    stageName = "home";
+    score.resetScore();
+    loop();
+});
+
+stageButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    stageName = "home";
+    score.resetScore();
     loop();
 });
 

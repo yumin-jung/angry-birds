@@ -8,27 +8,30 @@
 }
 
 body {
+    position: absolute;
+    top: 10vh;
+    left: 25vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 80vh;
     flex-direction: column;
 }
 
-#play {
+#play-home {
     position: absolute;
-    top: 35vh;
     border: none;
     background: none;
+    justify-content: center;
+    align-items: center;
     transition: all 0.8s ease;
 }
 
-#play:hover {
+#play-home:hover {
     transform: scale(1.2);
     cursor: pointer;
 }
 
-#play img {
+#play-home img {
     width: 45%;
     height: auto;
 }
@@ -98,4 +101,67 @@ body {
 #stage4 {
     top: 35vh;
     left: 63vw;
+}
+
+#pause-btn {
+    position: absolute;
+    top: 4vh;
+    left: 2vw;
+    border: none;
+    background: none;
+    transition: all 0.8s ease;
+}
+
+#play-btn {
+    position: absolute;
+    top: 4vh;
+    left: 2vw;
+    border: none;
+    background: none;
+    transition: all 0.8s ease;
+}
+
+#restart-btn {
+    position: absolute;
+    top: 4vh;
+    left: 6vw;
+    border: none;
+    background: none;
+    transition: all 0.8s ease;
+}
+
+#home-btn {
+    position: absolute;
+    top: 4vh;
+    left: 10vw;
+    border: none;
+    background: none;
+    transition: all 0.8s ease;
+}
+
+#stage-btn {
+    position: absolute;
+    top: 4vh;
+    left: 14vw;
+    border: none;
+    background: none;
+    transition: all 0.8s ease;
+}
+
+#pause-btn:hover,
+#play-btn:hover,
+#restart-btn:hover,
+#home-btn:hover,
+#stage-btn:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+#pause-img {
+    position: absolute;
+    top: 4px;
+    left: 0vh;
+    border: none;
+    background: none;
+    padding: 125px 300px;
 }

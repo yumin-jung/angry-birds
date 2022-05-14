@@ -24,30 +24,81 @@
         }
     </script>
 
-    <button id="play" type="button" onclick="hideButton('play'); showButton('stage');">
-        <img src="./data/play.png" alt="play">
+    <!-- play buttons -->
+    <button id="play-home" type="button" onclick="hideButton('play-home'); showButton('stage');">
+        <img src="./data/buttons/play.png" alt="play">
     </button>
 
+    <!-- stage buttons -->
     <div id="stage" style="display:none">
         <div id="stage-wrapper">
-            <button id="stage1" type="button" onclick="hideButton('stage');">1</button>
+            <button id="stage1" type="button" onclick="hideButton('stage');showButton('pause-btn');">1</button>
             <div id="stage1-star">⭐️ ⭐️ ⭐️</div>
         </div>
         <div id="stage-wrapper">
-            <button id="stage2" type="button" onclick="hideButton('stage');">2</button>
+            <button id="stage2" type="button" onclick="hideButton('stage');showButton('pause-btn');">2</button>
             <div id="stage2-star">⭐️</div>
         </div>
         <div id="stage-wrapper">
-            <button id="stage3" type="button" onclick="hideButton('stage');">3</button>
+            <button id="stage3" type="button" onclick="hideButton('stage');showButton('pause-btn');">3</button>
             <div id="stage3-star">⭐️</div>
         </div>
         <div id="stage-wrapper">
-            <button id="stage4" type="button" onclick="hideButton('stage');">4</button>
+            <button id="stage4" type="button" onclick="hideButton('stage');showButton('pause-btn');">4</button>
             <div id="stage4-star">⭐️</div>
         </div>
     </div>
 
+    <!-- score -->
     <div id="score" style="display:none">Score: 0</div>
+
+    <!-- function button -->
+    <div id="func-button">
+        <button id="pause-btn" type="button" style="display:none" onclick="hideButton('pause-btn');
+                showButton('pause-img');
+                showButton('play-btn');
+                showButton('restart-btn');
+                showButton('home-btn');
+                showButton('stage-btn');">
+            <img src="./data/buttons/pause-btn.png" alt="pause-btn">
+        </button>
+        <button id="pause-img" type="button" style="display:none">
+            <img src="./data/img/pause-img.png" alt="pause-img">
+        </button>
+        <button id="play-btn" type="button" style="display:none" onclick="showButton('pause-btn');
+                hideButton('pause-img');
+                hideButton('play-btn');
+                hideButton('restart-btn');
+                hideButton('home-btn');
+                hideButton('stage-btn');">
+            <img src="./data/buttons/play-btn.png" alt="play-btn">
+        </button>
+        <button id="restart-btn" type="button" style="display:none" onclick="showButton('pause-btn');
+                hideButton('pause-img');
+                hideButton('play-btn');
+                hideButton('restart-btn');
+                hideButton('home-btn');
+                hideButton('stage-btn');">
+            <img src="./data/buttons/restart-btn.png" alt="restart-btn">
+        </button>
+        <button id="home-btn" type="button" style="display:none" onclick="showButton('play-home');
+                hideButton('pause-img');
+                hideButton('play-btn');
+                hideButton('restart-btn');
+                hideButton('home-btn');
+                hideButton('stage-btn');">
+            <img src="./data/buttons/home-btn.png" alt="home-btn">
+        </button>
+        <button id="stage-btn" type="button" style="display:none" onclick="showButton('stage');
+                hideButton('pause-img');
+                hideButton('play-btn');
+                hideButton('restart-btn');
+                hideButton('home-btn');
+                hideButton('stage-btn');">
+            <img src="./data/buttons/stage-btn.png" alt="stage-btn">
+        </button>
+    </div>
+
     <script defer type="module" src="./src/main.js"></script>
 </body>
 
