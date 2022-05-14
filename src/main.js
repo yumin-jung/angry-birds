@@ -73,7 +73,7 @@ function setup() {
 function draw() {
     // input에 따라서 screen바꾸기
     if (stageName == "tutorial") {
-        Matter.Composite.clear(engine.world);
+        Composite.clear(engine.world);
 
         tutorialStage = new TutorialStage();
 
@@ -81,7 +81,8 @@ function draw() {
         Composite.add(engine.world, mouseConstraint);
 
         Events.on(mouseConstraint, 'enddrag', function (event) {
-            if (event.body == tutorialStage.bird.getBody()) firing = true;
+            console.log(event.body == tutorialStage.bird.body)
+            if (event.body == tutorialStage.bird.body) firing = true;
         })
 
         Events.on(engine, 'afterUpdate', function () {
@@ -95,7 +96,7 @@ function draw() {
             }
         })
     } else if (stageName == "pyramid") {
-        Matter.Composite.clear(engine.world);
+        Composite.clear(engine.world);
 
         pyramidStage = new PyramidStage();
 
@@ -103,7 +104,8 @@ function draw() {
         Composite.add(engine.world, mouseConstraint);
 
         Events.on(mouseConstraint, 'enddrag', function (event) {
-            if (event.body == pyramidStage.bird.getBody()) firing = true;
+            console.log(event.body == pyramidStage.bird.body)
+            if (event.body == pyramidStage.bird.body) firing = true;
         })
 
         Events.on(engine, 'afterUpdate', function () {
@@ -117,7 +119,7 @@ function draw() {
             }
         })
     } else if (stageName == "twoPyramid") {
-        Matter.Composite.clear(engine.world);
+        Composite.clear(engine.world);
 
         twoPyramidStage = new TwoPyramidStage();
 
@@ -125,7 +127,8 @@ function draw() {
         Composite.add(engine.world, mouseConstraint);
 
         Events.on(mouseConstraint, 'enddrag', function (event) {
-            if (event.body == twoPyramidStage.bird.getBody()) firing = true;
+            console.log(event.body == twoPyramidStage.bird.body)
+            if (event.body == twoPyramidStage.bird.body) firing = true;
         })
         Events.on(engine, 'afterUpdate', function () {
             if (firing && Math.abs(twoPyramidStage.bird.body.position.x - 250) < 20
