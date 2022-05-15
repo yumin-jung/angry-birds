@@ -12,8 +12,9 @@ class HalBird extends Bird {
         if (this.isAbility) {
             let body = this.body;
             if (body.force.x == 0) {
-                body.force.x -= 4
-                body.force.y += 2
+                body.force.x -= 3
+                body.force.y += 1.5
+                body.torque += 50;
                 setTimeout(() => {
                     body.force.x = 0
                     body.force.y = 0
