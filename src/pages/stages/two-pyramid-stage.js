@@ -2,7 +2,9 @@ import { RedBird } from '../../organisms/birds/red-bird';
 import { ChuckBird } from '../../organisms/birds/chuck-bird';
 import { BombBird } from '../../organisms/birds/bomb-bird';
 import { MinionPig } from '../../organisms/pigs/minion-pig';
-import { Box } from '../../molecules/box';
+import { KingPig } from '../../organisms/pigs/king-pig';
+import { WoodSquare } from '../../organisms/obstacles/wood-square';
+import { SteelSquare } from '../../organisms/obstacles/steel-square';
 import { Ground } from '../../molecules/ground';
 import { Slingshot } from '../../organisms/slingshot/slingshot';
 import { Subject } from '../../subject'
@@ -15,7 +17,9 @@ import {
     BIRD_SIZE_CHUCK,
     BIRD_SIZE_BOMB,
     PIG_SIZE_MINION,
+    PIG_SIZE_KING,
     GROUND_HEIGHT,
+    OBSTACLE_SQUARE_LENGTH,
     GROUND_X,
     GROUND_Y,
     Composite
@@ -28,28 +32,33 @@ class TwoPyramidStage extends Subject {
         this.remainingBirds = 3;
 
         this.bird = new RedBird(BIRD_X, BIRD_Y, BIRD_SIZE_RED);
-        this.ground1 = new Ground(GROUND_X, GROUND_Y, RENDER_WIDTH, GROUND_HEIGHT);
-        this.ground2 = new Ground(960, 250, 200, 20);
+        this.ground = new Ground(GROUND_X, GROUND_Y, RENDER_WIDTH, GROUND_HEIGHT);
         this.slingshot = new Slingshot(this.bird);
-        this.pig = new MinionPig(1000, 300, PIG_SIZE_MINION);
-        this.pyramid1 = Composites.pyramid(900, 300, 9, 10, 0, 0, function (x, y) {
-            let box1 = new Box(x, y, 25, 40);
-            return box1.getBody();
-        });
-        this.pyramid2 = Composites.pyramid(900, 0, 5, 10, 0, 0, function (x, y) {
-            let box2 = new Box(x, y, 25, 40);
-            return box2.getBody();
+        this.pig1 = new MinionPig(990, 300, PIG_SIZE_MINION);
+        this.pig2 = new KingPig(960, 170, PIG_SIZE_KING);
+        this.pig3 = new MinionPig(930, 300, PIG_SIZE_MINION);
+        this.pig4 = new MinionPig(1050, 300, PIG_SIZE_MINION);
+        this.steelSquare1 = new SteelSquare(900, 250, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
+        this.steelSquare2 = new SteelSquare(960, 250, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
+        this.steelSquare3 = new SteelSquare(1020, 250, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
+        this.pyramid = Matter.Composites.pyramid(840, 400, 5, 5, 0, 0, function (x, y) {
+            let box = new WoodSquare(x, y, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
+            return box.getBody()
         });
 
         this.composites.push(this.slingshot.getLeftElastic());
         this.composites.push(this.slingshot.getRightElastic());
         this.composites.push(this.slingshot.getSlingshotBody());
-        this.composites.push(this.ground1.getBody());
-        this.composites.push(this.ground2.getBody());
+        this.composites.push(this.ground.getBody());
         this.composites.push(this.bird.getBody());
-        this.composites.push(this.pig.getBody());
-        this.composites.push(this.pyramid1);
-        this.composites.push(this.pyramid2);
+        this.composites.push(this.pig1.getBody());
+        this.composites.push(this.pig2.getBody());
+        this.composites.push(this.pig3.getBody());
+        this.composites.push(this.pig4.getBody());
+        this.composites.push(this.steelSquare1.getBody());
+        this.composites.push(this.steelSquare2.getBody());
+        this.composites.push(this.steelSquare3.getBody());
+        this.composites.push(this.pyramid);
     }
 
     getComposites() {

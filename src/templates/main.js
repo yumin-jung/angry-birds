@@ -72,9 +72,6 @@ function setup() {
     runner = Runner.create();
     Runner.run(runner, engine);
 
-    // engine.timing.timeScale = 0.3 ;
-    // engine.gravity.scale += 0.001;
-
     // add mouse constraint to canvas
     mouse = Mouse.create(render.canvas);
 
@@ -190,11 +187,7 @@ stageButton.addEventListener('click', function (event) {
 
 // bird ability
 function keyPressed() {
-    if (key == ' ') {
-        resetEvents();
-        score.resetScore();
-        loop();
-    } else if (key == 'a') { // increase gravity
+    if (key == 'a') { // increase gravity
         engine.gravity.scale = 0.005;
         console.log(engine);
         setTimeout(() => {
@@ -250,11 +243,18 @@ function firingEvents(stage) {
         })
 
         Events.on(engine, 'afterUpdate', function () {
-            if (stage.pig.body.speed > 10) {
-                stage.updateScore(1);
-                Composite.remove(engine.world, stage.pig.body)
-                stage.pig.body.speed = 0;
-            }
+            // if (stage.pig.body.speed > 10) {
+            //     stage.updateScore(1);
+            //     Composite.remove(engine.world, stage.pig.body)
+            //     stage.pig.body.speed = 0;
+            // }
+            // if (stageName == "pyramid") {
+            //     let boxes = stage.pyramid.bodies.filter(x => x.speed > 10);
+            //     for (let box of boxes) {
+            //         box.position = { x: 1500, y: 1500 }
+            //         console.log(box);
+            //     }
+            // }
             if (firing && Math.abs(stage.bird.body.position.x - BIRD_X) < 20
                 && Math.abs(stage.bird.body.position.y - BIRD_Y) < 20
                 && stage.remainingBirds > 0) {

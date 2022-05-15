@@ -6,7 +6,7 @@ class WoodSquare extends Box {
         this.body.render.sprite.texture = '../../../data/obstacles/wood-square.png';
         this.body.render.sprite.xScale = 0.75;
         this.body.render.sprite.yScale = 0.75;
-        this.body.friction = 0.6;
+        this.body.friction = 0.8;
     };
 }
 

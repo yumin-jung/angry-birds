@@ -1,7 +1,8 @@
 import { RedBird } from '../../organisms/birds/red-bird';
 import { ChuckBird } from '../../organisms/birds/chuck-bird';
 import { MinionPig } from '../../organisms/pigs/minion-pig';
-import { Box } from '../../molecules/box';
+import { CorporalPig } from '../../organisms/pigs/corporal-pig';
+import { WoodSquare } from '../../organisms/obstacles/wood-square';
 import { Ground } from '../../molecules/ground';
 import { Slingshot } from '../../organisms/slingshot/slingshot';
 import { Subject } from '../../subject'
@@ -13,7 +14,9 @@ import {
     BIRD_SIZE_RED,
     BIRD_SIZE_CHUCK,
     PIG_SIZE_MINION,
+    PIG_SIZE_CORPORAL,
     GROUND_HEIGHT,
+    OBSTACLE_SQUARE_LENGTH,
     GROUND_X,
     GROUND_Y,
     Composite
@@ -28,10 +31,12 @@ class PyramidStage extends Subject {
         this.bird = new RedBird(BIRD_X, BIRD_Y, BIRD_SIZE_RED);
         this.ground = new Ground(GROUND_X, GROUND_Y, RENDER_WIDTH, GROUND_HEIGHT);
         this.slingshot = new Slingshot(this.bird);
-        this.pig = new MinionPig(1000, 300, PIG_SIZE_MINION);
+        this.pig1 = new MinionPig(710, 180, PIG_SIZE_MINION);
+        this.pig2 = new MinionPig(650, 180, PIG_SIZE_MINION);
+        this.pig3 = new CorporalPig(770, 180, PIG_SIZE_CORPORAL);
 
-        this.pyramid = Matter.Composites.pyramid(900, 100, 9, 10, 0, 0, function (x, y) {
-            let box = new Box(x, y, 30, 50);
+        this.pyramid = Matter.Composites.pyramid(500, 200, 7, 7, 0, 0, function (x, y) {
+            let box = new WoodSquare(x, y, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
             return box.getBody()
         });
 
@@ -40,7 +45,9 @@ class PyramidStage extends Subject {
         this.composites.push(this.slingshot.getSlingshotBody());
         this.composites.push(this.ground.getBody());
         this.composites.push(this.bird.getBody());
-        this.composites.push(this.pig.getBody());
+        this.composites.push(this.pig1.getBody());
+        this.composites.push(this.pig2.getBody());
+        this.composites.push(this.pig3.getBody());
         this.composites.push(this.pyramid);
     }
 

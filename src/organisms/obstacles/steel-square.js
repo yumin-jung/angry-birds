@@ -7,6 +7,7 @@ class SteelSquare extends Box {
         this.body.render.sprite.xScale = 0.75;
         this.body.render.sprite.yScale = 0.75;
         this.body.isStatic = true;
+        this.body.friction = 0.6;
     };
 }
 
