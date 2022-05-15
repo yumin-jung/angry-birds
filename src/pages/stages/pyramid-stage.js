@@ -37,13 +37,14 @@ class PyramidStage extends Subject {
         this.pig3 = new CorporalPig(771, 180, PIG_SIZE_CORPORAL);
 
         this.pyramid = Matter.Composites.pyramid(500, 200, 7, 7, 0, 0, function (x, y) {
-            let box = new WoodSquare(x, y, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
+            let box
+            if (x == 620 || x == 740) {
+                box = new IceSquare(x, y, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
+            } else {
+                box = new WoodSquare(x, y, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
+            }
             return box.getBody()
         });
-
-        this.iceSquare1 = new IceSquare(892, 300, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
-        this.iceSquare2 = new IceSquare(892, 240, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
-        this.iceSquare3 = new IceSquare(832, 240, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
 
         this.flyingBird = this.bird;
 
@@ -56,9 +57,6 @@ class PyramidStage extends Subject {
         this.composites.push(this.pig2.getBody());
         this.composites.push(this.pig3.getBody());
         this.composites.push(this.pyramid);
-        this.composites.push(this.iceSquare1.getBody());
-        this.composites.push(this.iceSquare2.getBody());
-        this.composites.push(this.iceSquare3.getBody());
     }
 
     getComposites() {

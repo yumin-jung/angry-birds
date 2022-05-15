@@ -13,17 +13,37 @@ class ScoreDisplay {
     }
     updateStar(stageName) {
         if (stageName == "stage1") {
-            document.getElementById('score1').innerHTML = `high record : ⭐️ ⭐️ ⭐️`;
-            document.getElementById('stage1-star').innerHTML = `⭐️ ⭐️ ⭐️`;
+            if (this.score_stage1 == 1) {
+                document.getElementById('score1').innerHTML = `high record : ⭐️ ⭐️ ⭐️`;
+                document.getElementById('stage1-star').innerHTML = `⭐️ ⭐️ ⭐️`;
+            }
         } else if (stageName == "stage2") {
-            document.getElementById('score2').innerHTML = `high record : ⭐️ ⭐️ ⭐️`;
-            document.getElementById('stage2-star').innerHTML = `⭐️ ⭐️ ⭐️`;
+            if (this.score_stage2 == 1) {
+                document.getElementById('score2').innerHTML = `high record : ⭐️`;
+                document.getElementById('stage2-star').innerHTML = `⭐️`;
+            } else if (this.score_stage2 > 1 && this.score_stage2 < 4) {
+                document.getElementById('score2').innerHTML = `high record : ⭐️ ⭐️`;
+                document.getElementById('stage2-star').innerHTML = `⭐️ ⭐️`;
+            } else if (this.score_stage2 == 4) {
+                document.getElementById('score2').innerHTML = `high record : ⭐️ ⭐️ ⭐️`;
+                document.getElementById('stage2-star').innerHTML = `⭐️ ⭐️ ⭐️`;
+            }
         } else if (stageName == "stage3") {
-            document.getElementById('score3').innerHTML = `high record : ⭐️ ⭐️ ⭐️`;
-            document.getElementById('stage3-star').innerHTML = `⭐️ ⭐️ ⭐️`;
+            if (this.score_stage3 == 1 || this.score_stage3 == 2) {
+                document.getElementById('score3').innerHTML = `high record : ⭐️`;
+                document.getElementById('stage3-star').innerHTML = `⭐️`;
+            } else if (this.score_stage3 > 2 && this.score_stage3 < 6) {
+                document.getElementById('score3').innerHTML = `high record : ⭐️ ⭐️`;
+                document.getElementById('stage3-star').innerHTML = `⭐️ ⭐️`;
+            } else if (this.score_stage3 == 6) {
+                document.getElementById('score3').innerHTML = `high record : ⭐️ ⭐️ ⭐️`;
+                document.getElementById('stage3-star').innerHTML = `⭐️ ⭐️ ⭐️`;
+            }
         } else if (stageName == "stage4") {
-            document.getElementById('score4').innerHTML = `high record : ⭐️ ⭐️ ⭐️`;
-            document.getElementById('stage4-star').innerHTML = `⭐️ ⭐️ ⭐️`;
+            if (this.score_stage4 == 2) {
+                document.getElementById('score4').innerHTML = `high record : ⭐️ ⭐️ ⭐️`;
+                document.getElementById('stage4-star').innerHTML = `⭐️ ⭐️ ⭐️`;
+            }
         }
     }
 

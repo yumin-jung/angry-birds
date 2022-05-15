@@ -256,6 +256,7 @@ function firingEvents(stage) {
             //         console.log(box);
             //     }
             // }
+            addScore(stage)
             if (firing && Math.abs(stage.bird.body.position.x - BIRD_X) < 20
                 && Math.abs(stage.bird.body.position.y - BIRD_Y) < 20
                 && stage.remainingBirds > 0) {
@@ -263,6 +264,59 @@ function firingEvents(stage) {
                 firing = false;
             }
         })
+    }
+}
+
+function addScore(stage) {
+    let score = 0;
+    if (stageName == "tutorial") {
+        if (stage.pig.body.position.x > RENDER_WIDTH) {
+            stage.pig.body.position.x = -100;
+            score += 1;
+            stage.updateScore(score);
+        }
+    }
+    else if (stageName == "pyramid") {
+        if (stage.pig1.body.position.x > RENDER_WIDTH) {
+            stage.pig1.body.position.x = -100;
+            score += 1;
+            stage.updateScore(score);
+        } else if (stage.pig2.body.position.x > RENDER_WIDTH) {
+            stage.pig2.body.position.x = -100;
+            score += 1;
+            stage.updateScore(score);
+        } else if (stage.pig3.body.position.x > RENDER_WIDTH) {
+            stage.pig3.body.position.x = -100;
+            score += 2;
+            stage.updateScore(score);
+        }
+    }
+    else if (stageName == "twoPyramid") {
+        if (stage.pig1.body.position.x > RENDER_WIDTH) {
+            stage.pig1.body.position.x = -100;
+            score += 1;
+            stage.updateScore(score);
+        } else if (stage.pig2.body.position.x > RENDER_WIDTH) {
+            stage.pig2.body.position.x = -100;
+            score += 3;
+            stage.updateScore(score);
+        } else if (stage.pig3.body.position.x > RENDER_WIDTH) {
+            stage.pig3.body.position.x = -100;
+            score += 1;
+            stage.updateScore(score);
+        } else if (stage.pig4.body.position.x > RENDER_WIDTH) {
+            stage.pig4.body.position.x = -100;
+            score += 1;
+            stage.updateScore(score);
+        }
+    }
+    else if (stageName == "boomerang") {
+        console.log(stage.pig.body.position.x);
+        if (stage.pig.body.position.x < 700) {
+            stage.pig.body.position.x = -100;
+            score += 2;
+            stage.updateScore(score);
+        }
     }
 }
 
