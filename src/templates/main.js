@@ -6,8 +6,6 @@ import {
     Runner,
     Mouse,
     Composite,
-    Composites,
-    Body,
     MouseConstraint,
     Events,
     RENDER_WIDTH,
@@ -21,8 +19,6 @@ import { TutorialStage } from '../pages/stages/tutorial-stage';
 import { PyramidStage } from '../pages/stages/pyramid-stage';
 import { TwoPyramidStage } from '../pages/stages/two-pyramid-stage';
 import { BoomerangStage } from '../pages/stages/boomerang-stage';
-
-import { RedBird } from '../organisms/birds/red-bird';
 import { ScoreDisplay } from '../pages/screens/ScoreDisplay';
 
 const stage1 = document.getElementById('stage1');
@@ -35,20 +31,19 @@ const restartButton = document.getElementById('restart-btn');
 const homeButton = document.getElementById('home-btn');
 const stageButton = document.getElementById('stage-btn');
 
-let score;
-
-let engine,
+let score,
+    engine,
     render,
     mouse,
     runner,
-    mouseConstraint;
-let stageName = "home";
-let firing = false;
-let homeScreen,
+    mouseConstraint,
+    homeScreen,
     tutorialStage,
     pyramidStage,
     twoPyramidStage,
     boomerangStage;
+let stageName = "home";
+let firing = false;
 
 function setup() {
     createCanvas(0, 0)
@@ -98,21 +93,25 @@ function draw() {
     }
     else if (stageName == "tutorial") {
         Composite.clear(engine.world);
+        score.score_stage1 = 0;
         tutorialStage = new TutorialStage();
         getStage(tutorialStage);
     }
     else if (stageName == "pyramid") {
         Composite.clear(engine.world);
+        score.score_stage2 = 0;
         pyramidStage = new PyramidStage();
         getStage(pyramidStage);
     }
     else if (stageName == "twoPyramid") {
         Composite.clear(engine.world);
+        score.score_stage3 = 0;
         twoPyramidStage = new TwoPyramidStage();
         getStage(twoPyramidStage);
     }
     else if (stageName == "boomerang") {
         Composite.clear(engine.world);
+        score.score_stage4 = 0;
         boomerangStage = new BoomerangStage();
         getStage(boomerangStage);
     }
@@ -157,18 +156,22 @@ playHomeButton.addEventListener('click', function (event) {
 restartButton.addEventListener('click', function (event) {
     event.preventDefault();
     if (stageName == "tutorial") {
+        score.score_stage1 = 0;
         document.getElementById('rb-stage1-red1').style.display = "flex";
         document.getElementById('rb-stage1-red2').style.display = "flex";
         document.getElementById('rb-stage1-red3').style.display = "flex";
     } else if (stageName == "pyramid") {
+        score.score_stage2 = 0;
         document.getElementById('rb-stage2-red1').style.display = "flex";
         document.getElementById('rb-stage2-chuck1').style.display = "flex";
         document.getElementById('rb-stage2-chuck2').style.display = "flex";
     } else if (stageName == "twoPyramid") {
+        score.score_stage3 = 0;
         document.getElementById('rb-stage3-red1').style.display = "flex";
         document.getElementById('rb-stage3-chuck1').style.display = "flex";
         document.getElementById('rb-stage3-bomb1').style.display = "flex";
     } else if (stageName == "boomerang") {
+        score.score_stage4 = 0;
         document.getElementById('rb-stage4-hal1').style.display = "flex";
         document.getElementById('rb-stage4-hal2').style.display = "flex";
         document.getElementById('rb-stage4-hal3').style.display = "flex";
@@ -244,18 +247,6 @@ function firingEvents(stage) {
         })
 
         Events.on(engine, 'afterUpdate', function () {
-            // if (stage.pig.body.speed > 10) {
-            //     stage.updateScore(1);
-            //     Composite.remove(engine.world, stage.pig.body)
-            //     stage.pig.body.speed = 0;
-            // }
-            // if (stageName == "pyramid") {
-            //     let boxes = stage.pyramid.bodies.filter(x => x.speed > 10);
-            //     for (let box of boxes) {
-            //         box.position = { x: 1500, y: 1500 }
-            //         console.log(box);
-            //     }
-            // }
             addScore(stage)
             if (firing && Math.abs(stage.bird.body.position.x - BIRD_X) < 20
                 && Math.abs(stage.bird.body.position.y - BIRD_Y) < 20
@@ -267,6 +258,7 @@ function firingEvents(stage) {
     }
 }
 
+// add stage score
 function addScore(stage) {
     let score = 0;
     if (stageName == "tutorial") {
@@ -311,7 +303,6 @@ function addScore(stage) {
         }
     }
     else if (stageName == "boomerang") {
-        console.log(stage.pig.body.position.x);
         if (stage.pig.body.position.x < 700) {
             stage.pig.body.position.x = -100;
             score += 2;

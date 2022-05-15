@@ -38,7 +38,8 @@
                 showButton('rb-stage1');
                 showButton('rb-stage1-red1');
                 showButton('rb-stage1-red2');
-                showButton('rb-stage1-red3');">1</button>
+                showButton('rb-stage1-red3');
+                showButton('transparent');">1</button>
             <div id="stage1-star">start!!</div>
         </div>
         <div id="stage-wrapper">
@@ -48,7 +49,8 @@
                 showButton('rb-stage2');
                 showButton('rb-stage2-red1');
                 showButton('rb-stage2-chuck1');
-                showButton('rb-stage2-chuck2');">2</button>
+                showButton('rb-stage2-chuck2');
+                showButton('transparent');">2</button>
             <div id="stage2-star">start!!</div>
         </div>
         <div id="stage-wrapper">
@@ -58,7 +60,8 @@
                 showButton('rb-stage3');
                 showButton('rb-stage3-red1');
                 showButton('rb-stage3-chuck1');
-                showButton('rb-stage3-bomb1');">3</button>
+                showButton('rb-stage3-bomb1');
+                showButton('transparent');">3</button>
             <div id="stage3-star">start!!</div>
         </div>
         <div id="stage-wrapper">
@@ -68,7 +71,8 @@
                 showButton('rb-stage4');
                 showButton('rb-stage4-hal1');
                 showButton('rb-stage4-hal2');
-                showButton('rb-stage4-hal3');">4</button>
+                showButton('rb-stage4-hal3');
+                showButton('transparent');">4</button>
             <div id="stage4-star">start!!</div>
         </div>
     </div>
@@ -80,7 +84,8 @@
                 showButton('play-btn');
                 showButton('restart-btn');
                 showButton('home-btn');
-                showButton('stage-btn');">
+                showButton('stage-btn');
+                hideButton('transparent');">
             <img src="./data/buttons/pause-btn.png" alt="pause-btn">
         </button>
         <button id="pause-img" type="button" style="display:none">
@@ -91,7 +96,8 @@
                 hideButton('play-btn');
                 hideButton('restart-btn');
                 hideButton('home-btn');
-                hideButton('stage-btn');">
+                hideButton('stage-btn');
+                showButton('transparent');">
             <img src="./data/buttons/play-btn.png" alt="play-btn">
         </button>
         <button id="restart-btn" type="button" style="display:none" onclick="showButton('pause-btn');
@@ -99,7 +105,8 @@
                 hideButton('play-btn');
                 hideButton('restart-btn');
                 hideButton('home-btn');
-                hideButton('stage-btn');">
+                hideButton('stage-btn');
+                showButton('transparent');">
             <img src="./data/buttons/restart-btn.png" alt="restart-btn">
         </button>
         <button id="home-btn" type="button" style="display:none" onclick="showButton('play-home');
@@ -168,8 +175,11 @@
             <img src="./data/birds/hal.png" id="rb-stage4-hal2">
             <img src="./data/birds/hal.png" id="rb-stage4-hal3">
         </div>
-
     </div>
+
+    <!-- transparent -->
+    <button id="transparent" type="button" style="display:none"></button>
+
     <script defer type="module" src="./src/templates/main.js"></script>
 </body>
 

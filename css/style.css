@@ -210,3 +210,13 @@ body {
     padding-left: 10px;
     padding-bottom: 6px;
 }
+
+#transparent {
+    position: absolute;
+    width: 800px;
+    height: 580px;
+    top: 3vh;
+    right: 1vw;
+    background: none;
+    border: none;
+}
