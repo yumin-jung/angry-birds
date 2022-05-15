@@ -7,6 +7,13 @@ class BombBird extends Bird {
         this.body.render.sprite.xScale = 0.5;
         this.body.render.sprite.yScale = 0.5;
     };
+
+    ability() {
+        let body = this.body;
+        Matter.Body.scale(body, 1.5, 1.5);
+        body.render.sprite.xScale = 0.75;
+        body.render.sprite.yScale = 0.75;
+    }
 }
 
 export { BombBird };

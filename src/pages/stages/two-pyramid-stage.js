@@ -45,6 +45,7 @@ class TwoPyramidStage extends Subject {
             let box = new WoodSquare(x, y, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
             return box.getBody()
         });
+        this.flyingBird = this.bird;
 
         this.composites.push(this.slingshot.getLeftElastic());
         this.composites.push(this.slingshot.getRightElastic());

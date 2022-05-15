@@ -7,6 +7,7 @@ import {
     Mouse,
     Composite,
     Composites,
+    Body,
     MouseConstraint,
     Events,
     RENDER_WIDTH,
@@ -187,23 +188,22 @@ stageButton.addEventListener('click', function (event) {
 
 // bird ability
 function keyPressed() {
-    if (key == 'a') { // increase gravity
-        engine.gravity.scale = 0.005;
-        console.log(engine);
-        setTimeout(() => {
-            engine.gravity.scale = 0.001;
-        }, 500)
-    } else if (key == 'b') { // increase x-axis-gravity
-        engine.gravity.x = -1;
-        engine.gravity.scale = 0.002;
-        console.log(engine);
-        setTimeout(() => {
-            engine.gravity.x = 0;
-            engine.gravity.scale = 0.001;
-        }, 3000)
-    } else if (key == 's') {
-        console.log("s");
-        score.addScore(1);
+    if (key == ' ') {
+        if (stageName == "pyramid") {
+            if (pyramidStage.remainingBirds >= 0) {
+                pyramidStage.flyingBird.ability();
+            }
+        }
+        else if (stageName == "twoPyramid") {
+            if (twoPyramidStage.remainingBirds >= 0) {
+                twoPyramidStage.flyingBird.ability();
+            }
+        }
+        else if (stageName == "boomerang") {
+            if (boomerangStage.remainingBirds >= 0) {
+                boomerangStage.flyingBird.ability();
+            }
+        }
     }
 }
 
@@ -255,11 +255,15 @@ function firingEvents(stage) {
             //         console.log(box);
             //     }
             // }
+            // console.log(stage.pig.body.force.x);
             if (firing && Math.abs(stage.bird.body.position.x - BIRD_X) < 20
                 && Math.abs(stage.bird.body.position.y - BIRD_Y) < 20
                 && stage.remainingBirds > 0) {
                 stage.firing(engine.world);
                 firing = false;
+                setTimeout(() => {
+                    stage.flyingBird = stage.bird;
+                }, 1000)
             }
         })
     }

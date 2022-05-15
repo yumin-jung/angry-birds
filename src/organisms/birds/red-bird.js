@@ -7,6 +7,10 @@ class RedBird extends Bird {
         this.body.render.sprite.xScale = 0.4;
         this.body.render.sprite.yScale = 0.4;
     };
+
+    ability() {
+
+    }
 }
 
 export { RedBird };

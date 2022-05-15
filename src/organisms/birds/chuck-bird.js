@@ -7,6 +7,16 @@ class ChuckBird extends Bird {
         this.body.render.sprite.xScale = 0.5;
         this.body.render.sprite.yScale = 0.5;
     };
+
+    ability() {
+        let body = this.body;
+        if (body.force.x == 0) {
+            body.force.x += 0.7
+            setTimeout(() => {
+                body.force.x = 0
+            }, 500)
+        }
+    }
 }
 
 export { ChuckBird };

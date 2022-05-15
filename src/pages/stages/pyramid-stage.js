@@ -3,6 +3,7 @@ import { ChuckBird } from '../../organisms/birds/chuck-bird';
 import { MinionPig } from '../../organisms/pigs/minion-pig';
 import { CorporalPig } from '../../organisms/pigs/corporal-pig';
 import { WoodSquare } from '../../organisms/obstacles/wood-square';
+import { IceSquare } from '../../organisms/obstacles/ice-square';
 import { Ground } from '../../molecules/ground';
 import { Slingshot } from '../../organisms/slingshot/slingshot';
 import { Subject } from '../../subject'
@@ -33,12 +34,18 @@ class PyramidStage extends Subject {
         this.slingshot = new Slingshot(this.bird);
         this.pig1 = new MinionPig(710, 180, PIG_SIZE_MINION);
         this.pig2 = new MinionPig(650, 180, PIG_SIZE_MINION);
-        this.pig3 = new CorporalPig(770, 180, PIG_SIZE_CORPORAL);
+        this.pig3 = new CorporalPig(771, 180, PIG_SIZE_CORPORAL);
 
         this.pyramid = Matter.Composites.pyramid(500, 200, 7, 7, 0, 0, function (x, y) {
             let box = new WoodSquare(x, y, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
             return box.getBody()
         });
+
+        this.iceSquare1 = new IceSquare(892, 300, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
+        this.iceSquare2 = new IceSquare(892, 240, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
+        this.iceSquare3 = new IceSquare(832, 240, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
+
+        this.flyingBird = this.bird;
 
         this.composites.push(this.slingshot.getLeftElastic());
         this.composites.push(this.slingshot.getRightElastic());
@@ -49,6 +56,9 @@ class PyramidStage extends Subject {
         this.composites.push(this.pig2.getBody());
         this.composites.push(this.pig3.getBody());
         this.composites.push(this.pyramid);
+        this.composites.push(this.iceSquare1.getBody());
+        this.composites.push(this.iceSquare2.getBody());
+        this.composites.push(this.iceSquare3.getBody());
     }
 
     getComposites() {

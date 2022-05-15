@@ -33,6 +33,7 @@ class BoomerangStage extends Subject {
         this.steelSquare3 = new SteelSquare(600, 420, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
         this.steelSquare4 = new SteelSquare(800, 540, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
 
+        this.flyingBird = this.bird;
         this.composites.push(this.slingshot.getLeftElastic());
         this.composites.push(this.slingshot.getRightElastic());
         this.composites.push(this.slingshot.getSlingshotBody());
