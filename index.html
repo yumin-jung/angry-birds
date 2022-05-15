@@ -32,25 +32,30 @@
     <!-- stage buttons -->
     <div id="stage" style="display:none">
         <div id="stage-wrapper">
-            <button id="stage1" type="button" onclick="hideButton('stage');showButton('pause-btn');">1</button>
+            <button id="stage1" type="button" onclick="hideButton('stage');
+                showButton('pause-btn');
+                showButton('score');">1</button>
             <div id="stage1-star">⭐️ ⭐️ ⭐️</div>
         </div>
         <div id="stage-wrapper">
-            <button id="stage2" type="button" onclick="hideButton('stage');showButton('pause-btn');">2</button>
+            <button id="stage2" type="button" onclick="hideButton('stage');
+                showButton('pause-btn');
+                showButton('score');">2</button>
             <div id="stage2-star">⭐️</div>
         </div>
         <div id="stage-wrapper">
-            <button id="stage3" type="button" onclick="hideButton('stage');showButton('pause-btn');">3</button>
+            <button id="stage3" type="button" onclick="hideButton('stage');
+                showButton('pause-btn');
+                showButton('score');">3</button>
             <div id="stage3-star">⭐️</div>
         </div>
         <div id="stage-wrapper">
-            <button id="stage4" type="button" onclick="hideButton('stage');showButton('pause-btn');">4</button>
+            <button id="stage4" type="button" onclick="hideButton('stage');
+                showButton('pause-btn');
+                showButton('score');">4</button>
             <div id="stage4-star">⭐️</div>
         </div>
     </div>
-
-    <!-- score -->
-    <div id="score" style="display:none">Score: 0</div>
 
     <!-- function button -->
     <div id="func-button">
@@ -82,6 +87,7 @@
             <img src="./data/buttons/restart-btn.png" alt="restart-btn">
         </button>
         <button id="home-btn" type="button" style="display:none" onclick="showButton('play-home');
+                hideButton('score');
                 hideButton('pause-img');
                 hideButton('play-btn');
                 hideButton('restart-btn');
@@ -90,6 +96,7 @@
             <img src="./data/buttons/home-btn.png" alt="home-btn">
         </button>
         <button id="stage-btn" type="button" style="display:none" onclick="showButton('stage');
+                hideButton('score');
                 hideButton('pause-img');
                 hideButton('play-btn');
                 hideButton('restart-btn');
@@ -99,7 +106,10 @@
         </button>
     </div>
 
-    <script defer type="module" src="./src/main.js"></script>
+    <!-- score -->
+    <div id="score" style="display:none">Score: 0</div>
+
+    <script defer type="module" src="./src/templates/main.js"></script>
 </body>
 
 </html>

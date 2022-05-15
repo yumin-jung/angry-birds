@@ -1,4 +1,4 @@
-import '../css/style.css';
+import '../../css/style.css';
 
 import {
     Engine,
@@ -10,17 +10,19 @@ import {
     MouseConstraint,
     Events,
     RENDER_WIDTH,
-    RENDER_HEIGHT
-} from './atoms/constants';
+    RENDER_HEIGHT,
+    BIRD_X,
+    BIRD_Y
+} from '../atoms/constants';
 
-import { HomeScreen } from './templates/screens/home-screen';
-import { TutorialStage } from './templates/stages/tutorial-stage';
-import { PyramidStage } from './templates/stages/pyramid-stage';
-import { TwoPyramidStage } from './templates/stages/two-pyramid-stage';
-import { BoomerangStage } from './templates/stages/boomerang-stage';
+import { HomeScreen } from '../pages/screens/home-screen';
+import { TutorialStage } from '../pages/stages/tutorial-stage';
+import { PyramidStage } from '../pages/stages/pyramid-stage';
+import { TwoPyramidStage } from '../pages/stages/two-pyramid-stage';
+import { BoomerangStage } from '../pages/stages/boomerang-stage';
 
-import { RedBird } from './organisms/birds/red-bird';
-import { ScoreDisplay } from './ScoreDisplay';
+import { RedBird } from '../organisms/birds/red-bird';
+import { ScoreDisplay } from '../pages/screens/ScoreDisplay';
 
 const stage1 = document.getElementById('stage1');
 const stage2 = document.getElementById('stage2');
@@ -43,7 +45,6 @@ let engine,
     mouseConstraint;
 let stageName = "home";
 let firing = false;
-
 let homeScreen,
     tutorialStage,
     pyramidStage,
@@ -55,7 +56,7 @@ function setup() {
 
     score = new ScoreDisplay();
 
-    // load homeScreen
+    // init render canvas
     engine = Engine.create();
     render = Render.create({
         element: document.body,
@@ -76,6 +77,7 @@ function setup() {
     // engine.timing.timeScale = 0.3 ;
     // engine.gravity.scale += 0.001;
 
+    // add mouse constraint to canvas
     mouse = Mouse.create(render.canvas);
 
     mouseConstraint = MouseConstraint.create(engine, {
@@ -92,56 +94,52 @@ function setup() {
 }
 
 function draw() {
+    // add composites to render canvas
     if (stageName == "home") {
         Composite.clear(engine.world);
-
         homeScreen = new HomeScreen();
-
         addComposites(homeScreen);
     }
     else if (stageName == "tutorial") {
         Composite.clear(engine.world);
-
         tutorialStage = new TutorialStage();
-
         getStage(tutorialStage);
     }
     else if (stageName == "pyramid") {
         Composite.clear(engine.world);
-
         pyramidStage = new PyramidStage();
-
         getStage(pyramidStage);
     }
     else if (stageName == "twoPyramid") {
         Composite.clear(engine.world);
-
         twoPyramidStage = new TwoPyramidStage();
-
         getStage(twoPyramidStage);
     }
     else if (stageName == "boomerang") {
         Composite.clear(engine.world);
-
         boomerangStage = new BoomerangStage();
-
         getStage(boomerangStage);
     }
     noLoop();
 }
 
+
+// remove composites from render canvas
 stage1.addEventListener('click', function (event) {
     event.preventDefault();
     resetStage("tutorial");
 });
+
 stage2.addEventListener('click', function (event) {
     event.preventDefault();
     resetStage("pyramid");
 });
+
 stage3.addEventListener('click', function (event) {
     event.preventDefault();
     resetStage("twoPyramid");
 });
+
 stage4.addEventListener('click', function (event) {
     event.preventDefault();
     resetStage("boomerang");
@@ -183,6 +181,7 @@ stageButton.addEventListener('click', function (event) {
     resetStage("home");
 });
 
+// bird ability
 function keyPressed() {
     if (key == ' ') {
         resetEvents();
@@ -206,12 +205,14 @@ function keyPressed() {
     }
 }
 
+// function at home and stage select stage
 function mousePressed() {
     if (stageName == "home" || stageName == "selectStage") {
         homeScreen.addBody(engine.world);
     }
 }
 
+// reset events
 function resetEvents() {
     if (stageName == "tutorial" || stageName == "pyramid"
         || stageName == "twoPyramid" || stageName == "boomerang") {
@@ -220,38 +221,53 @@ function resetEvents() {
     }
 }
 
+// constraint firing
 function firingEvents(stage) {
-    Events.on(mouseConstraint, 'startdrag', function () {
-        setTimeout(function () {
-            stage.slingshot.elastic1.body.render.visible = true;
-            stage.slingshot.elastic2.body.render.visible = true;
-        }, 100)
-    })
+    console.log(stage.remainingBirds)
+    if (stage.remainingBirds > 0) {
+        Events.on(mouseConstraint, 'startdrag', function () {
+            setTimeout(function () {
+                stage.slingshot.elastic1.body.render.visible = true;
+                stage.slingshot.elastic2.body.render.visible = true;
+            }, 100)
+        })
 
-    Events.on(mouseConstraint, 'enddrag', function (event) {
-        stage.slingshot.elastic1.body.render.visible = false;
-        stage.slingshot.elastic2.body.render.visible = false;
-        if (event.body == stage.bird.body) firing = true;
-    })
+        Events.on(mouseConstraint, 'enddrag', function (event) {
+            stage.slingshot.elastic1.body.render.visible = false;
+            stage.slingshot.elastic2.body.render.visible = false;
+            if (event.body == stage.bird.body) {
+                firing = true;
+                stage.remaingBirds -= 1;
+            }
+        })
 
-    Events.on(engine, 'afterUpdate', function () {
-        if (firing && Math.abs(stage.bird.body.position.x - 250) < 20
-            && Math.abs(stage.bird.body.position.y - 450) < 20) {
-            let newBird = new RedBird(250, 450, 20);
-            stage.bird = newBird;
-            Composite.add(engine.world, stage.bird.getBody());
-            stage.slingshot.elastic1.body.bodyB = stage.bird.getBody();
-            stage.slingshot.elastic2.body.bodyB = stage.bird.getBody();
-            firing = false;
-        }
-    })
+        Events.on(engine, 'afterUpdate', function () {
+            console.log(stage.pig.body.speed)
+            if (stage.pig.body.speed > 10) {
+                stage.updateScore(1);
+                Composite.remove(engine.world, stage.pig.body)
+                stage.pig.body.speed = 0;
+            }
+            if (firing && Math.abs(stage.bird.body.position.x - BIRD_X) < 20
+                && Math.abs(stage.bird.body.position.y - BIRD_Y) < 20) {
+                let newBird = new RedBird(BIRD_X, BIRD_Y, 20);
+                stage.bird = newBird;
+                Composite.add(engine.world, stage.bird.getBody());
+                stage.slingshot.elastic1.body.bodyB = stage.bird.getBody();
+                stage.slingshot.elastic2.body.bodyB = stage.bird.getBody();
+                firing = false;
+            }
+        })
+    }
 }
 
+// add composites of stage
 function addComposites(stage) {
     Composite.add(engine.world, stage.getComposites());
     Composite.add(engine.world, mouseConstraint);
 }
 
+// add composites and firing events
 function getStage(stage) {
     let getStageComposite = new Promise((resolve) => {
         addComposites(stage);
@@ -262,10 +278,12 @@ function getStage(stage) {
     })
 
     getStageComposite.then(() => {
+        stage.subscribe(score);
         firingEvents(stage);
     })
 }
 
+// reset stage and change stageName
 function resetStage(stage) {
     let awaitReset = new Promise((resolve) => {
         resetEvents();
