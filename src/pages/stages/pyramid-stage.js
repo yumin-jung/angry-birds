@@ -6,7 +6,7 @@ import { WoodSquare } from '../../organisms/obstacles/wood-square';
 import { IceSquare } from '../../organisms/obstacles/ice-square';
 import { Ground } from '../../molecules/ground';
 import { Slingshot } from '../../organisms/slingshot/slingshot';
-import { Subject } from '../../subject'
+import { Subject } from '../../templates/subject'
 
 import {
     RENDER_WIDTH,

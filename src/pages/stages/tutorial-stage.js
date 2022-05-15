@@ -3,7 +3,7 @@ import { MinionPig } from '../../organisms/pigs/minion-pig';
 import { Ground } from '../../molecules/ground';
 import { Slingshot } from '../../organisms/slingshot/slingshot';
 import { SteelSquare } from '../../organisms/obstacles/steel-square';
-import { Subject } from '../../subject'
+import { Subject } from '../../templates/subject'
 import {
     RENDER_WIDTH,
     BIRD_X,
