@@ -46,7 +46,7 @@ class PyramidStage extends Subject {
     }
 
     updateScore(score) {
-        this.notifySubscribers('updateScore',
+        this.notifySubscribers('update-score-stage2',
             { remainingBirds: this.remainingBirds },
             { scoreToAdd: score }
         )

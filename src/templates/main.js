@@ -284,10 +284,9 @@ function getStage(stage) {
 }
 
 // reset stage and change stageName
-function resetStage(stage) {
+async function resetStage(stage) {
     let awaitReset = new Promise((resolve) => {
         resetEvents();
-        score.resetScore();
         setTimeout(function () {
             resolve('success');
         }, 100)

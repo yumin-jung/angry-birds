@@ -36,10 +36,17 @@ body {
     height: auto;
 }
 
-#score {
+#score1,
+#score2,
+#score3,
+#score4 {
+    font-family: 'angry-birds';
+    color: white;
+
+    font-size: 32px;
     position: absolute;
-    top: 15vh;
-    left: 12vw;
+    top: 5vh;
+    right: 5vw;
 }
 
 #stage {
@@ -78,6 +85,8 @@ body {
 #stage2-star,
 #stage3-star,
 #stage4-star {
+    font-family: 'angry-birds';
+    color: white;
     padding: 6px;
     text-align: center;
     font-size: 24px;

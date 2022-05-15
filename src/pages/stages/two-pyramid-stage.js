@@ -52,7 +52,7 @@ class TwoPyramidStage extends Subject {
     }
 
     updateScore(score) {
-        this.notifySubscribers('updateScore',
+        this.notifySubscribers('update-score-stage3',
             { remainingBirds: this.remainingBirds },
             { scoreToAdd: score }
         )

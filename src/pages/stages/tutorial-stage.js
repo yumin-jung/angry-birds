@@ -43,7 +43,7 @@ class TutorialStage extends Subject {
     }
 
     updateScore(score) {
-        this.notifySubscribers('updateScore',
+        this.notifySubscribers('update-score-stage1',
             { remainingBirds: this.remainingBirds },
             { scoreToAdd: score }
         )

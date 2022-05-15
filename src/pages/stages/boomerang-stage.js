@@ -51,7 +51,7 @@ class BoomerangStage extends Subject {
     }
 
     updateScore(score) {
-        this.notifySubscribers('updateScore',
+        this.notifySubscribers('update-score-stage4',
             { remainingBirds: this.remainingBirds },
             { scoreToAdd: score }
         )
