@@ -12,7 +12,6 @@ class ScoreDisplay {
         }
     }
     updateStar(stageName) {
-        console.log('ss')
         if (stageName == "stage1") {
             document.getElementById('score1').innerHTML = `high record : ⭐️ ⭐️ ⭐️`;
             document.getElementById('stage1-star').innerHTML = `⭐️ ⭐️ ⭐️`;

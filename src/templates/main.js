@@ -30,8 +30,6 @@ const stage3 = document.getElementById('stage3');
 const stage4 = document.getElementById('stage4');
 
 const playHomeButton = document.getElementById('play-home');
-const pauseButton = document.getElementById('pause-btn');
-const playButton = document.getElementById('play-btn');
 const restartButton = document.getElementById('restart-btn');
 const homeButton = document.getElementById('home-btn');
 const stageButton = document.getElementById('stage-btn');
@@ -158,16 +156,25 @@ playHomeButton.addEventListener('click', function (event) {
     })
 });
 
-// pauseButton.addEventListener('click', function (event) {
-//     event.preventDefault();
-// });
-
-// playButton.addEventListener('click', function (event) {
-//     event.preventDefault();
-// });
-
 restartButton.addEventListener('click', function (event) {
     event.preventDefault();
+    if (stageName == "tutorial") {
+        document.getElementById('rb-stage1-red1').style.display = "flex";
+        document.getElementById('rb-stage1-red2').style.display = "flex";
+        document.getElementById('rb-stage1-red3').style.display = "flex";
+    } else if (stageName == "pyramid") {
+        document.getElementById('rb-stage2-red1').style.display = "flex";
+        document.getElementById('rb-stage2-chuck1').style.display = "flex";
+        document.getElementById('rb-stage2-chuck2').style.display = "flex";
+    } else if (stageName == "twoPyramid") {
+        document.getElementById('rb-stage3-red1').style.display = "flex";
+        document.getElementById('rb-stage3-chuck1').style.display = "flex";
+        document.getElementById('rb-stage3-bomb1').style.display = "flex";
+    } else if (stageName == "boomerang") {
+        document.getElementById('rb-stage4-hal1').style.display = "flex";
+        document.getElementById('rb-stage4-hal2').style.display = "flex";
+        document.getElementById('rb-stage4-hal3').style.display = "flex";
+    }
     resetStage(stageName);
 });
 
@@ -251,22 +258,7 @@ function firingEvents(stage) {
             if (firing && Math.abs(stage.bird.body.position.x - BIRD_X) < 20
                 && Math.abs(stage.bird.body.position.y - BIRD_Y) < 20
                 && stage.remainingBirds > 0) {
-                if (stage.remainingBirds == 3) {
-                    document.getElementById('rb-stage1-red1').style.display = "none";
-                } else if (stage.remainingBirds == 2) {
-                    document.getElementById('rb-stage1-red2').style.display = "none";
-                } else if (stage.remainingBirds == 1) {
-                    document.getElementById('rb-stage1-red3').style.display = "none";
-                }
-                stage.remainingBirds -= 1;
-                if (stage.remainingBirds == 0) {
-                    document.getElementById('now-bird-stage1').innerHTML = "none";
-                }
-                let newBird = new RedBird(BIRD_X, BIRD_Y, 20);
-                stage.bird = newBird;
-                Composite.add(engine.world, stage.bird.getBody());
-                stage.slingshot.elastic1.body.bodyB = stage.bird.getBody();
-                stage.slingshot.elastic2.body.bodyB = stage.bird.getBody();
+                stage.firing(engine.world);
                 firing = false;
             }
         })
@@ -296,7 +288,7 @@ function getStage(stage) {
 }
 
 // reset stage and change stageName
-async function resetStage(stage) {
+function resetStage(stage) {
     let awaitReset = new Promise((resolve) => {
         resetEvents();
         setTimeout(function () {

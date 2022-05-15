@@ -8,12 +8,13 @@ import {
     RENDER_WIDTH,
     BIRD_X,
     BIRD_Y,
-    BIRD_SIZE_RED,
+    BIRD_SIZE_HAL,
     GROUND_HEIGHT,
     GROUND_X,
     GROUND_Y,
     OBSTACLE_SQUARE_LENGTH,
-    PIG_SIZE_CORPORAL
+    PIG_SIZE_CORPORAL,
+    Composite
 } from '../../atoms/constants';
 
 class BoomerangStage extends Subject {
@@ -21,9 +22,8 @@ class BoomerangStage extends Subject {
         super();
         this.composites = [];
         this.remainingBirds = 3;
-        // hal, hal, hal
 
-        this.bird = new HalBird(BIRD_X, BIRD_Y, BIRD_SIZE_RED);
+        this.bird = new HalBird(BIRD_X, BIRD_Y, BIRD_SIZE_HAL);
         this.ground1 = new Ground(GROUND_X, GROUND_Y, RENDER_WIDTH, GROUND_HEIGHT);
         this.slingshot = new Slingshot(this.bird);
         this.pig = new CorporalPig(700, 500, PIG_SIZE_CORPORAL);
@@ -31,7 +31,6 @@ class BoomerangStage extends Subject {
         this.steelSquare1 = new SteelSquare(600, 540, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
         this.steelSquare2 = new SteelSquare(600, 480, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
         this.steelSquare3 = new SteelSquare(600, 420, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
-        this.steelSquare4 = new SteelSquare(600, 360, OBSTACLE_SQUARE_LENGTH, OBSTACLE_SQUARE_LENGTH);
 
         this.composites.push(this.slingshot.getLeftElastic());
         this.composites.push(this.slingshot.getRightElastic());
@@ -43,7 +42,6 @@ class BoomerangStage extends Subject {
         this.composites.push(this.steelSquare1.getBody());
         this.composites.push(this.steelSquare2.getBody());
         this.composites.push(this.steelSquare3.getBody());
-        this.composites.push(this.steelSquare4.getBody());
     }
 
     getComposites() {
@@ -55,6 +53,35 @@ class BoomerangStage extends Subject {
             { remainingBirds: this.remainingBirds },
             { scoreToAdd: score }
         )
+    }
+
+    firing(world) {
+        let slingshot = this.slingshot;
+        let bird = this.bird;
+        let newBird;
+
+        if (this.remainingBirds == 3) {
+            document.getElementById('rb-stage4-hal1').style.display = "none";
+            newBird = new HalBird(BIRD_X, BIRD_Y, BIRD_SIZE_HAL);
+        } else if (this.remainingBirds == 2) {
+            document.getElementById('rb-stage4-hal2').style.display = "none";
+            newBird = new HalBird(BIRD_X, BIRD_Y, BIRD_SIZE_HAL);
+        } else if (this.remainingBirds == 1) {
+            document.getElementById('rb-stage4-hal3').style.display = "none";
+        }
+        this.remainingBirds -= 1;
+        if (this.remainingBirds == 0) {
+            slingshot.elastic1.body.bodyB = null;
+            slingshot.elastic2.body.bodyB = null;
+            Composite.remove(world, slingshot.getLeftElastic());
+            Composite.remove(world, slingshot.getRightElastic());
+        } else {
+            this.bird = newBird;
+            bird = this.bird;
+            Composite.add(world, bird.getBody());
+            slingshot.elastic1.body.bodyB = bird.getBody();
+            slingshot.elastic2.body.bodyB = bird.getBody();
+        }
     }
 }
 

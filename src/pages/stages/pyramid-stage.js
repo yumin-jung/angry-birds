@@ -1,4 +1,5 @@
 import { RedBird } from '../../organisms/birds/red-bird';
+import { ChuckBird } from '../../organisms/birds/chuck-bird';
 import { MinionPig } from '../../organisms/pigs/minion-pig';
 import { Box } from '../../molecules/box';
 import { Ground } from '../../molecules/ground';
@@ -10,10 +11,12 @@ import {
     BIRD_X,
     BIRD_Y,
     BIRD_SIZE_RED,
+    BIRD_SIZE_CHUCK,
     PIG_SIZE_MINION,
     GROUND_HEIGHT,
     GROUND_X,
-    GROUND_Y
+    GROUND_Y,
+    Composite
 } from '../../atoms/constants';
 
 class PyramidStage extends Subject {
@@ -50,6 +53,33 @@ class PyramidStage extends Subject {
             { remainingBirds: this.remainingBirds },
             { scoreToAdd: score }
         )
+    }
+
+    firing(world) {
+        let slingshot = this.slingshot;
+        let bird = this.bird;
+
+        if (this.remainingBirds == 3) {
+            document.getElementById('rb-stage2-red1').style.display = "none";
+        } else if (this.remainingBirds == 2) {
+            document.getElementById('rb-stage2-chuck1').style.display = "none";
+        } else if (this.remainingBirds == 1) {
+            document.getElementById('rb-stage2-chuck2').style.display = "none";
+        }
+        this.remainingBirds -= 1;
+        if (this.remainingBirds == 0) {
+            slingshot.elastic1.body.bodyB = null;
+            slingshot.elastic2.body.bodyB = null;
+            Composite.remove(world, slingshot.getLeftElastic());
+            Composite.remove(world, slingshot.getRightElastic());
+        } else {
+            let newBird = new ChuckBird(BIRD_X, BIRD_Y, BIRD_SIZE_CHUCK);
+            this.bird = newBird;
+            bird = this.bird;
+            Composite.add(world, bird.getBody());
+            slingshot.elastic1.body.bodyB = bird.getBody();
+            slingshot.elastic2.body.bodyB = bird.getBody();
+        }
     }
 }
 

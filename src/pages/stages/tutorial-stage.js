@@ -13,7 +13,8 @@ import {
     GROUND_HEIGHT,
     GROUND_X,
     GROUND_Y,
-    OBSTACLE_SQUARE_LENGTH
+    OBSTACLE_SQUARE_LENGTH,
+    Composite
 } from '../../atoms/constants';
 
 
@@ -47,6 +48,33 @@ class TutorialStage extends Subject {
             { remainingBirds: this.remainingBirds },
             { scoreToAdd: score }
         )
+    }
+
+    firing(world) {
+        let slingshot = this.slingshot;
+        let bird = this.bird;
+
+        if (this.remainingBirds == 3) {
+            document.getElementById('rb-stage1-red1').style.display = "none";
+        } else if (this.remainingBirds == 2) {
+            document.getElementById('rb-stage1-red2').style.display = "none";
+        } else if (this.remainingBirds == 1) {
+            document.getElementById('rb-stage1-red3').style.display = "none";
+        }
+        this.remainingBirds -= 1;
+        if (this.remainingBirds == 0) {
+            slingshot.elastic1.body.bodyB = null;
+            slingshot.elastic2.body.bodyB = null;
+            Composite.remove(world, slingshot.getLeftElastic());
+            Composite.remove(world, slingshot.getRightElastic());
+        } else {
+            let newBird = new RedBird(BIRD_X, BIRD_Y, 20);
+            this.bird = newBird;
+            bird = this.bird;
+            Composite.add(world, bird.getBody());
+            slingshot.elastic1.body.bodyB = bird.getBody();
+            slingshot.elastic2.body.bodyB = bird.getBody();
+        }
     }
 }
 
