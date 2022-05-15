@@ -9,12 +9,15 @@ class ChuckBird extends Bird {
     };
 
     ability() {
-        let body = this.body;
-        if (body.force.x == 0) {
-            body.force.x += 0.7
-            setTimeout(() => {
-                body.force.x = 0
-            }, 500)
+        if (this.isAbility) {
+            let body = this.body;
+            if (body.force.x == 0) {
+                body.force.x += 0.7
+                setTimeout(() => {
+                    body.force.x = 0
+                }, 500)
+            }
+            this.isAbility = false;
         }
     }
 }

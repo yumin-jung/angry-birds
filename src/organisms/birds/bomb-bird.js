@@ -9,10 +9,13 @@ class BombBird extends Bird {
     };
 
     ability() {
-        let body = this.body;
-        Matter.Body.scale(body, 1.5, 1.5);
-        body.render.sprite.xScale = 0.75;
-        body.render.sprite.yScale = 0.75;
+        if (this.isAbility) {
+            let body = this.body;
+            Matter.Body.scale(body, 1.5, 1.5);
+            body.render.sprite.xScale = 0.75;
+            body.render.sprite.yScale = 0.75;
+            this.isAbility = false;
+        }
     }
 }
 

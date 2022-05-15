@@ -9,14 +9,17 @@ class HalBird extends Bird {
     };
 
     ability() {
-        let body = this.body;
-        if (body.force.x == 0) {
-            body.force.x -= 4
-            body.force.y += 2
-            setTimeout(() => {
-                body.force.x = 0
-                body.force.y = 0
-            }, 500)
+        if (this.isAbility) {
+            let body = this.body;
+            if (body.force.x == 0) {
+                body.force.x -= 4
+                body.force.y += 2
+                setTimeout(() => {
+                    body.force.x = 0
+                    body.force.y = 0
+                }, 500)
+            }
+            this.isAbility = false;
         }
     }
 }

@@ -6,6 +6,7 @@ class Bird extends Body {
         this.body = Matter.Bodies.circle(x, y, r, {
             density: 0.005
         });
+        this.isAbility = true;
     }
 }
 

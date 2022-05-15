@@ -234,6 +234,7 @@ function firingEvents(stage) {
         })
 
         Events.on(mouseConstraint, 'enddrag', function (event) {
+            stage.flyingBird = stage.bird;
             stage.slingshot.elastic1.body.render.visible = false;
             stage.slingshot.elastic2.body.render.visible = false;
             if (event.body == stage.bird.body) {
@@ -255,15 +256,11 @@ function firingEvents(stage) {
             //         console.log(box);
             //     }
             // }
-            // console.log(stage.pig.body.force.x);
             if (firing && Math.abs(stage.bird.body.position.x - BIRD_X) < 20
                 && Math.abs(stage.bird.body.position.y - BIRD_Y) < 20
                 && stage.remainingBirds > 0) {
                 stage.firing(engine.world);
                 firing = false;
-                setTimeout(() => {
-                    stage.flyingBird = stage.bird;
-                }, 1000)
             }
         })
     }
