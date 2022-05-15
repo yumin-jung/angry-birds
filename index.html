@@ -34,25 +34,29 @@
         <div id="stage-wrapper">
             <button id="stage1" type="button" onclick="hideButton('stage');
                 showButton('pause-btn');
-                showButton('score1');">1</button>
+                showButton('score1');
+                showButton('rb-stage1');">1</button>
             <div id="stage1-star">start!!</div>
         </div>
         <div id="stage-wrapper">
             <button id="stage2" type="button" onclick="hideButton('stage');
                 showButton('pause-btn');
-                showButton('score2');">2</button>
+                showButton('score2');
+                showButton('rb-stage2');">2</button>
             <div id="stage2-star">start!!</div>
         </div>
         <div id="stage-wrapper">
             <button id="stage3" type="button" onclick="hideButton('stage');
                 showButton('pause-btn');
-                showButton('score3');">3</button>
+                showButton('score3');
+                showButton('rb-stage3');">3</button>
             <div id="stage3-star">start!!</div>
         </div>
         <div id="stage-wrapper">
             <button id="stage4" type="button" onclick="hideButton('stage');
                 showButton('pause-btn');
-                showButton('score4');">4</button>
+                showButton('score4');
+                showButton('rb-stage4');">4</button>
             <div id="stage4-star">start!!</div>
         </div>
     </div>
@@ -95,8 +99,12 @@
                 hideButton('play-btn');
                 hideButton('restart-btn');
                 hideButton('home-btn');
-                hideButton('stage-btn');">
-            <img src="./data/buttons/home-btn.png" alt="home-btn">
+                hideButton('stage-btn')
+                hideButton('rb-stage1');
+                hideButton('rb-stage2');
+                hideButton('rb-stage3');
+                hideButton('rb-stage4');">
+            <img src=" ./data/buttons/home-btn.png" alt="home-btn">
         </button>
         <button id="stage-btn" type="button" style="display:none" onclick="showButton('stage');
                 hideButton('score1');
@@ -107,7 +115,11 @@
                 hideButton('play-btn');
                 hideButton('restart-btn');
                 hideButton('home-btn');
-                hideButton('stage-btn');">
+                hideButton('stage-btn');
+                hideButton('rb-stage1');
+                hideButton('rb-stage2');
+                hideButton('rb-stage3');
+                hideButton('rb-stage4');">
             <img src="./data/buttons/stage-btn.png" alt="stage-btn">
         </button>
     </div>
@@ -118,6 +130,34 @@
     <div id="score3" style="display:none">no record</div>
     <div id="score4" style="display:none">no record</div>
 
+    <!-- remaining birds -->
+    <div id="rb-wrapper">
+        <div id="rb-stage1" style="display:none">
+            <div id="now-bird-stage1">Now</div>
+            <img src="./data/birds/red.png" id="rb-stage1-red1">
+            <img src="./data/birds/red.png" id="rb-stage1-red2">
+            <img src="./data/birds/red.png" id="rb-stage1-red3">
+        </div>
+        <div id="rb-stage2" style="display:none">
+            <div id="now-bird-stage2">Now</div>
+            <img src="./data/birds/red.png" alt="rb-stage2-red1">
+            <img src="./data/birds/chuck.png" alt="rb-stage2-chuck1">
+            <img src="./data/birds/chuck.png" alt="rb-stage2-chuck2">
+        </div>
+        <div id="rb-stage3" style="display:none">
+            <div id="now-bird-stage3">Now</div>
+            <img src="./data/birds/red.png" alt="rb-stage3-red1">
+            <img src="./data/birds/chuck.png" alt="rb-stage3-chuck1">
+            <img src="./data/birds/bomb.png" alt="rb-stage3-bomb1">
+        </div>
+        <div id="rb-stage4" style="display:none">
+            <div id="now-bird-stage4">Now</div>
+            <img src="./data/birds/hal.png" alt="rb-stage4-hal1">
+            <img src="./data/birds/hal.png" alt="rb-stage4-hal2">
+            <img src="./data/birds/hal.png" alt="rb-stage4-hal3">
+        </div>
+
+    </div>
     <script defer type="module" src="./src/templates/main.js"></script>
 </body>
 

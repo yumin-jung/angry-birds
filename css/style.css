@@ -47,6 +47,7 @@ body {
     position: absolute;
     top: 5vh;
     right: 5vw;
+    cursor: default;
 }
 
 #stage {
@@ -169,8 +170,43 @@ body {
 #pause-img {
     position: absolute;
     top: 4px;
-    left: 0vh;
+    left: 0vw;
     border: none;
     background: none;
     padding: 125px 300px;
+}
+
+#rb-wrapper {
+    position: absolute;
+    top: 20vh;
+    left: 2vw;
+}
+
+#rb-stage1,
+#rb-stage2,
+#rb-stage3,
+#rb-stage4 {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 60px;
+    height: auto;
+    left: 4px;
+    justify-content: flex-start;
+}
+
+#rb-wrapper img {
+    width: 80%;
+    height: auto;
+    margin-bottom: 8px;
+}
+
+#now-bird-stage1,
+#now-bird-stage2,
+#now-bird-stage3,
+#now-bird-stage4 {
+    font-family: 'angry-birds';
+    color: white;
+    padding-left: 10px;
+    padding-bottom: 6px;
 }

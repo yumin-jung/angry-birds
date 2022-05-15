@@ -6,12 +6,6 @@ class ScoreDisplay {
         this.score_stage3 = 0;
         this.score_stage4 = 0;
     }
-    resetScore() {
-        document.getElementById('stage1-star').innerHTML = ` a`;
-        document.getElementById('stage2-star').innerHTML = ` `;
-        document.getElementById('stage3-star').innerHTML = ` `;
-        document.getElementById('stage4-star').innerHTML = ` `;
-    }
     scoreToStar(score) {
         if (score > 0) {
             return 3;
@@ -20,16 +14,16 @@ class ScoreDisplay {
     updateStar(stageName) {
         console.log('ss')
         if (stageName == "stage1") {
-            document.getElementById('score1').innerHTML = `high record: ⭐️ ⭐️ ⭐️`;
+            document.getElementById('score1').innerHTML = `high record : ⭐️ ⭐️ ⭐️`;
             document.getElementById('stage1-star').innerHTML = `⭐️ ⭐️ ⭐️`;
         } else if (stageName == "stage2") {
-            document.getElementById('score2').innerHTML = `high record: ⭐️ ⭐️ ⭐️`;
+            document.getElementById('score2').innerHTML = `high record : ⭐️ ⭐️ ⭐️`;
             document.getElementById('stage2-star').innerHTML = `⭐️ ⭐️ ⭐️`;
         } else if (stageName == "stage3") {
-            document.getElementById('score3').innerHTML = `high record: ⭐️ ⭐️ ⭐️`;
+            document.getElementById('score3').innerHTML = `high record : ⭐️ ⭐️ ⭐️`;
             document.getElementById('stage3-star').innerHTML = `⭐️ ⭐️ ⭐️`;
         } else if (stageName == "stage4") {
-            document.getElementById('score4').innerHTML = `high record: ⭐️ ⭐️ ⭐️`;
+            document.getElementById('score4').innerHTML = `high record : ⭐️ ⭐️ ⭐️`;
             document.getElementById('stage4-star').innerHTML = `⭐️ ⭐️ ⭐️`;
         }
     }

@@ -194,11 +194,13 @@ function keyPressed() {
             engine.gravity.scale = 0.001;
         }, 500)
     } else if (key == 'b') { // increase x-axis-gravity
-        engine.gravity.x = 1;
+        engine.gravity.x = -1;
+        engine.gravity.scale = 0.002;
         console.log(engine);
         setTimeout(() => {
             engine.gravity.x = 0;
-        }, 500)
+            engine.gravity.scale = 0.001;
+        }, 3000)
     } else if (key == 's') {
         console.log("s");
         score.addScore(1);
@@ -223,7 +225,6 @@ function resetEvents() {
 
 // constraint firing
 function firingEvents(stage) {
-    console.log(stage.remainingBirds)
     if (stage.remainingBirds > 0) {
         Events.on(mouseConstraint, 'startdrag', function () {
             setTimeout(function () {
@@ -242,14 +243,25 @@ function firingEvents(stage) {
         })
 
         Events.on(engine, 'afterUpdate', function () {
-            console.log(stage.pig.body.speed)
             if (stage.pig.body.speed > 10) {
                 stage.updateScore(1);
                 Composite.remove(engine.world, stage.pig.body)
                 stage.pig.body.speed = 0;
             }
             if (firing && Math.abs(stage.bird.body.position.x - BIRD_X) < 20
-                && Math.abs(stage.bird.body.position.y - BIRD_Y) < 20) {
+                && Math.abs(stage.bird.body.position.y - BIRD_Y) < 20
+                && stage.remainingBirds > 0) {
+                if (stage.remainingBirds == 3) {
+                    document.getElementById('rb-stage1-red1').style.display = "none";
+                } else if (stage.remainingBirds == 2) {
+                    document.getElementById('rb-stage1-red2').style.display = "none";
+                } else if (stage.remainingBirds == 1) {
+                    document.getElementById('rb-stage1-red3').style.display = "none";
+                }
+                stage.remainingBirds -= 1;
+                if (stage.remainingBirds == 0) {
+                    document.getElementById('now-bird-stage1').innerHTML = "none";
+                }
                 let newBird = new RedBird(BIRD_X, BIRD_Y, 20);
                 stage.bird = newBird;
                 Composite.add(engine.world, stage.bird.getBody());
