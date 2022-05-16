@@ -1,5 +1,3 @@
-## This document is proposal of [*Project1*](http://git.prototyping.id/20170595/Angry-Birds) by 20170595 _Yumin Jung_ 🚀
-
 ## Contents
 - [Concept of the Game 🔥](#concept-of-the-game-)
   - [Angry Birds](#angry-birds)
