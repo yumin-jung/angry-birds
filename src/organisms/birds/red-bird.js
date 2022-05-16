@@ -8,6 +8,7 @@ class RedBird extends Bird {
         this.body.render.sprite.yScale = 0.4;
     };
 
+    // red bird ability
     ability() {
         if (this.isAbility) {
             console.log("I'm cute!!")

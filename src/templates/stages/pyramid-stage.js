@@ -63,6 +63,7 @@ class PyramidStage extends Subject {
         return this.composites;
     }
 
+    // transmit information to ScoreDisplay
     updateScore(score) {
         this.notifySubscribers('update-score-stage2',
             { remainingBirds: this.remainingBirds },
@@ -70,6 +71,7 @@ class PyramidStage extends Subject {
         )
     }
 
+    // control bird firing
     firing(world) {
         let slingshot = this.slingshot;
         let bird = this.bird;

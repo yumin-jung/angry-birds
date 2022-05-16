@@ -19,7 +19,7 @@ import { TutorialStage } from '../templates/stages/tutorial-stage';
 import { PyramidStage } from '../templates/stages/pyramid-stage';
 import { TwoPyramidStage } from '../templates/stages/two-pyramid-stage';
 import { BoomerangStage } from '../templates/stages/boomerang-stage';
-import { ScoreDisplay } from '../templates/screens/ScoreDisplay';
+import { ScoreDisplay } from '../templates/screens/score-display';
 
 const stage1 = document.getElementById('stage1');
 const stage2 = document.getElementById('stage2');
@@ -84,8 +84,8 @@ function setup() {
     render.mouse = mouse;
 }
 
+// add composites to render canvas
 function draw() {
-    // add composites to render canvas
     if (stageName == "home") {
         Composite.clear(engine.world);
         homeScreen = new HomeScreen();
@@ -119,7 +119,7 @@ function draw() {
 }
 
 
-// remove composites from render canvas
+// remove composites from render canvas when stage button is clicked
 stage1.addEventListener('click', function (event) {
     event.preventDefault();
     resetStage("tutorial");
@@ -140,6 +140,7 @@ stage4.addEventListener('click', function (event) {
     resetStage("boomerang");
 });
 
+// home screen to stage select screen
 playHomeButton.addEventListener('click', function (event) {
     event.preventDefault();
     let awaitReset = new Promise((resolve) => {
@@ -153,6 +154,7 @@ playHomeButton.addEventListener('click', function (event) {
     })
 });
 
+// when user click restart button
 restartButton.addEventListener('click', function (event) {
     event.preventDefault();
     if (stageName == "tutorial") {
@@ -179,11 +181,13 @@ restartButton.addEventListener('click', function (event) {
     resetStage(stageName);
 });
 
+// when user click home button at pause screen
 homeButton.addEventListener('click', function (event) {
     event.preventDefault();
     resetStage("home");
 });
 
+// when user click stage select button at pause screen
 stageButton.addEventListener('click', function (event) {
     event.preventDefault();
     resetStage("home");
@@ -231,7 +235,7 @@ function resetEvents() {
     }
 }
 
-// constraint firing
+// check firing events
 function firingEvents(stage) {
     if (stage.remainingBirds > 0) {
         Events.on(mouseConstraint, 'startdrag', function () {

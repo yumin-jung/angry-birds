@@ -11,6 +11,7 @@ class ScoreDisplay {
         this.score_stage4_high = 0;
     }
 
+    // update score if user get high record
     updateStar(stageName) {
         this.storeHighScore();
         if (stageName == "stage1") {
@@ -48,6 +49,7 @@ class ScoreDisplay {
         }
     }
 
+    // store high score in class
     storeHighScore() {
         if (this.score_stage1 > this.score_stage1_high) {
             this.score_stage1_high = this.score_stage1;
@@ -60,6 +62,7 @@ class ScoreDisplay {
         }
     }
 
+    // receive information from stages
     update(source, ...others) {
         if (source == 'update-score-stage1') {
             const { remainingBirds } = others[0];

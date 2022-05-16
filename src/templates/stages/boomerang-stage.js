@@ -51,6 +51,7 @@ class BoomerangStage extends Subject {
         return this.composites;
     }
 
+    // transmit information to ScoreDisplay
     updateScore(score) {
         this.notifySubscribers('update-score-stage4',
             { remainingBirds: this.remainingBirds },
@@ -58,6 +59,7 @@ class BoomerangStage extends Subject {
         )
     }
 
+    // control bird firing
     firing(world) {
         let slingshot = this.slingshot;
         let bird = this.bird;

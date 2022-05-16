@@ -45,6 +45,7 @@ class TutorialStage extends Subject {
         return this.composites;
     }
 
+    // transmit information to ScoreDisplay
     updateScore(score) {
         this.notifySubscribers('update-score-stage1',
             { remainingBirds: this.remainingBirds },
@@ -52,6 +53,7 @@ class TutorialStage extends Subject {
         )
     }
 
+    // control bird firing
     firing(world) {
         let slingshot = this.slingshot;
         let bird = this.bird;

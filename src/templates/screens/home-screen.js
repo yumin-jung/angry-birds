@@ -58,6 +58,7 @@ class HomeScreen {
         return this.composites;
     }
 
+    // add random body to render canvas
     addBody(world) {
         let newBody = new RedBird(GROUND_HEIGHT + Math.random() * 1000, GROUND_HEIGHT, BIRD_SIZE_RED);
         let rand = Math.floor(Math.random() * 7);

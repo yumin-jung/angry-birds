@@ -8,6 +8,7 @@ class ChuckBird extends Bird {
         this.body.render.sprite.yScale = 0.5;
     };
 
+    // chuck bird ability
     ability() {
         if (this.isAbility) {
             let body = this.body;

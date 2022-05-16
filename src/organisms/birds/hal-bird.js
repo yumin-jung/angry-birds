@@ -8,6 +8,7 @@ class HalBird extends Bird {
         this.body.render.sprite.yScale = 0.6;
     };
 
+    // hal bird ability
     ability() {
         if (this.isAbility) {
             let body = this.body;

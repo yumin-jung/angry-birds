@@ -8,6 +8,7 @@ class BombBird extends Bird {
         this.body.render.sprite.yScale = 0.4;
     };
 
+    // bomb bird ability
     ability() {
         if (this.isAbility) {
             let body = this.body;
