@@ -9,7 +9,10 @@ class RedBird extends Bird {
     };
 
     ability() {
-
+        if (this.isAbility) {
+            console.log("I'm cute!!")
+            this.isAbility = false;
+        }
     }
 }
 

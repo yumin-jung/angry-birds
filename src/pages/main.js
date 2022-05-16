@@ -14,12 +14,12 @@ import {
     BIRD_Y
 } from '../atoms/constants';
 
-import { HomeScreen } from '../pages/screens/home-screen';
-import { TutorialStage } from '../pages/stages/tutorial-stage';
-import { PyramidStage } from '../pages/stages/pyramid-stage';
-import { TwoPyramidStage } from '../pages/stages/two-pyramid-stage';
-import { BoomerangStage } from '../pages/stages/boomerang-stage';
-import { ScoreDisplay } from '../pages/screens/ScoreDisplay';
+import { HomeScreen } from '../templates/screens/home-screen';
+import { TutorialStage } from '../templates/stages/tutorial-stage';
+import { PyramidStage } from '../templates/stages/pyramid-stage';
+import { TwoPyramidStage } from '../templates/stages/two-pyramid-stage';
+import { BoomerangStage } from '../templates/stages/boomerang-stage';
+import { ScoreDisplay } from '../templates/screens/ScoreDisplay';
 
 const stage1 = document.getElementById('stage1');
 const stage2 = document.getElementById('stage2');
@@ -192,7 +192,12 @@ stageButton.addEventListener('click', function (event) {
 // bird ability
 function keyPressed() {
     if (key == ' ') {
-        if (stageName == "pyramid") {
+        if (stageName == "tutorial") {
+            if (tutorialStage.remainingBirds >= 0) {
+                tutorialStage.flyingBird.ability();
+            }
+        }
+        else if (stageName == "pyramid") {
             if (pyramidStage.remainingBirds >= 0) {
                 pyramidStage.flyingBird.ability();
             }

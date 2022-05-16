@@ -3,7 +3,7 @@ import { CorporalPig } from '../../organisms/pigs/corporal-pig';
 import { Ground } from '../../molecules/ground';
 import { Slingshot } from '../../organisms/slingshot/slingshot';
 import { SteelSquare } from '../../organisms/obstacles/steel-square';
-import { Subject } from '../../templates/subject'
+import { Subject } from '../../pages/subject'
 import {
     RENDER_WIDTH,
     BIRD_X,
