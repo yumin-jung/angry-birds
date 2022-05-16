@@ -75,12 +75,12 @@ The game series focuses on a flock of birds who try to save their eggs from gree
   - User must adjust the angle to get the pig out of the screen.
   - Remaining birds are displayed on the left side and are reduced one by one when the birds are fired.
   - To use each bird's ability, user have to press the space bar.
-  
+  <br></br>
   <img src="readme-img/stage-score.png" width="80%" height="80%">
 
   - If the pig goes out of the screen, user get score.
   - When user press the pause button, user go to corresponding `Pause Screen`.
-  
+  <br></br>
   <img src="readme-img/stage-select-score.png" width="80%" height="80%">
 
   - When the user records the highest score, the highest score appears on the stage `Select Screen`.
