@@ -1,4 +1,4 @@
-import '/css/style.css';
+import '../../css/style.css';
 
 import {
     Engine,
@@ -12,14 +12,14 @@ import {
     RENDER_HEIGHT,
     BIRD_X,
     BIRD_Y
-} from '/src/atoms/constants';
+} from '../atoms/constants';
 
-import { HomeScreen } from '/src/templates/screens/home-screen';
-import { TutorialStage } from '/src/templates/stages/tutorial-stage';
-import { PyramidStage } from '/src/templates/stages/pyramid-stage';
-import { TwoPyramidStage } from '/src/templates/stages/two-pyramid-stage';
-import { BoomerangStage } from '/src/templates/stages/boomerang-stage';
-import { ScoreDisplay } from '/src/templates/screens/score-display';
+import { HomeScreen } from '../templates/screens/home-screen';
+import { TutorialStage } from '../templates/stages/tutorial-stage';
+import { PyramidStage } from '../templates/stages/pyramid-stage';
+import { TwoPyramidStage } from '../templates/stages/two-pyramid-stage';
+import { BoomerangStage } from '../templates/stages/boomerang-stage';
+import { ScoreDisplay } from '../templates/screens/score-display';
 
 const stage1 = document.getElementById('stage1');
 const stage2 = document.getElementById('stage2');
