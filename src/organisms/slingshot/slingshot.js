@@ -20,7 +20,7 @@ class Slingshot extends Body {
         this.elastic2.body.render.visible = false;
 
         this.slingshotBody = new Box(SLIGSHOT_BODY_X, SLIGSHOT_BODY_Y, 0.1, 0.1);
-        this.slingshotBody.body.render.sprite.texture = '../../../data/img/slingshot.png';
+        this.slingshotBody.body.render.sprite.texture = 'https://raw.githubusercontent.com/yumin-jung/Angry-Birds/main/data/img/slingshot.png';
         this.slingshotBody.body.render.sprite.xScale = 0.15;
         this.slingshotBody.body.render.sprite.yScale = 0.15;
         this.slingshotBody.body.isStatic = true;
