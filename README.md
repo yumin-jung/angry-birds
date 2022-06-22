@@ -274,3 +274,4 @@ Make slingshot function more like real Angry Birds'!
   - [Angry Birds Wiki](https://angrybirds.fandom.com/wiki/Angry_Birds_Wiki)
 - ### Design Pattern
   - [Atomic Design Pattern](https://danilowoz.com/blog/atomic-design-with-react)
+
