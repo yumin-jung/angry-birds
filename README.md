@@ -22,6 +22,15 @@
 - [Issue and Known Bug 🐞](#issue-and-known-bug-)
 - [Reference 🌿](#reference-)
 
+## Local Development 🧑‍💻
+
+```bash
+git clone git@github.com:yumin-jung/angry-birds.git
+cd angry-birds
+npm i
+npm run dev
+```
+
 # Concept of the Game 🔥
 
 ## Angry Birds
