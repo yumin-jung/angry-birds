@@ -9,8 +9,9 @@
 
 body {
     position: absolute;
-    top: 10vh;
-    left: 25vh;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;
     align-items: center;
